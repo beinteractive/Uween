@@ -26,4 +26,11 @@ public static class TweenVec1Extensions
     {
         return tween.FromThat<T, float>();
     }
+
+    public static T FromThatBy<T>(this T tween) where T : TweenVec1
+    {
+        tween.from = tween.value + tween.to;
+        tween.to = tween.value;
+        return tween;
+    }
 }
