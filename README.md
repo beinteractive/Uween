@@ -103,6 +103,7 @@ You can set to call method you like when tween completed.
 You can set a initial value. It will be apply immediately to GameObject (before delay).
 
  - `.From(v)` - Set a initial value to `v`.
+ - `.FromThat()` - Set a initial value to destination Value and destination value to current Value.
 
 ### Relative value
 
@@ -110,7 +111,6 @@ You can set a destination or initial value relative from current value.
 
  - `.By()` - Current Value -> Current Value + Destination Value
  - `.FromBy(v)` - Current Value + `v` -> Destination Value
- - `.FromThat()` - Destination Value -> Current Value
  - `.FromThatBy()` - Current Value + Destination Value -> Current Value
 
 ref. Normal tween is: Current Value -> Destination Value
