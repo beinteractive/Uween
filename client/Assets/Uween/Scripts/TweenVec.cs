@@ -42,4 +42,11 @@ public static class TweenVecExtensions
         tween.value = from;
         return tween;
     }
+
+    public static T FromThat<T, V>(this T tween) where T : TweenVec<V>
+    {
+        tween.from = tween.to;
+        tween.to = tween.value;
+        return tween;
+    }
 }
