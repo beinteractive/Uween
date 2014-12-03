@@ -6,7 +6,7 @@ Uween is a simple tween library for Unity.
 
 ### Simple & Lightweight
 
-Uween is super simple. Core system is 100 lines code. Simple is powerful.
+Uween is super simple. Core system (`Tween.cs`) is about 100 lines code. Simple is powerful.
 
 ### Easy to use
 
@@ -39,6 +39,8 @@ Simply copy a `Uween` directory to your Unity project.
 
 Open a `Uween - Example/Scenes/Example.unity` scene.
 All code is written in `Uween - Example/Scripts/Example.cs`.
+
+* This example uses uGUI so you requires Unity version >= 4.6.
 
 ## Quick help
 
