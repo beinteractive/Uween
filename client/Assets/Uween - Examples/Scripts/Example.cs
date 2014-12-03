@@ -49,5 +49,8 @@ public class Example : MonoBehaviour
         
         // Scale Y - Repeat - Ease In Out Sine - With Delay
         // TweenSY.Add(image, 1f, Random.Range(0.5f, 2f)).EaseInOutSine().Delay(0.5f).Then(animate);
+        
+        // Rotation Z - Repeat - Ease In Out Sine - With Delay
+        // TweenRZ.Add(image, 1f, Random.Range(-360f, 360f)).EaseInOutSine().Delay(0.5f).Then(animate);
     }
 }
