@@ -106,13 +106,14 @@ You can set a initial value. It will be apply immediately to GameObject (before 
 
 ### Relative value
 
-You can set a value relative from current position.
+You can set a destination or initial value relative from current value.
 
- - `.By()` - Current Position -> Current Position + To Position
- - `.FromThat()` - To Position -> Current Position
- - `.FromThatBy()` - Current Position + To Position -> Current Position
+ - `.By()` - Current Value -> Current Value + Destination Value
+ - `.FromBy(v)` - Current Value + `v` -> Destination Value
+ - `.FromThat()` - Destination Value -> Current Value
+ - `.FromThatBy()` - Current Value + Destination Value -> Current Value
 
-ref. Normal tween is: Current Position -> To Position
+ref. Normal tween is: Current Value -> Destination Value
 
 ### TweenNull
 

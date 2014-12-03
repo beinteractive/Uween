@@ -37,6 +37,9 @@ public class Example : MonoBehaviour
         // Move X - Repeat - Ease In Out Sine - From Specified Position to Current Position
         // TweenX.Add(image, 1f, Random.Range(Screen.width / -2f, Screen.width / 2f)).FromThat().EaseInOutSine().Then(animate);
         
+        // Move X - Repeat - Ease In Out Sine - To Position from Current Position + Specified Position
+        // TweenX.Add(image, 1f, 90f).FromBy(-30f).EaseInOutSine().Then(animate);
+
         // Move X - Repeat - Ease In Out Sine - To Position that Current Position + Specified Position
         // TweenX.Add(image, 1f, 60f).By().EaseInOutSine().Then(animate);
         

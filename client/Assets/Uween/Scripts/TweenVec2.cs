@@ -27,6 +27,17 @@ public static class TweenVec2Extensions
         return tween;
     }
     
+    public static T FromBy<T>(this T tween, Vector2 from) where T : TweenVec2
+    {
+        tween.from = tween.value + from;
+        return tween;
+    }
+    
+    public static T FromBy<T>(this T tween, float fromV1, float fromV2) where T : TweenVec2
+    {
+        return FromBy<T>(tween, new Vector2(fromV1, fromV2));
+    }
+
     public static T FromThat<T>(this T tween) where T : TweenVec2
     {
         return tween.FromThat<T, Vector2>();
