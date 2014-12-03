@@ -4,17 +4,6 @@ using Uween;
 
 public static class FluentSyntax
 {
-    public static T Then<T>(this T tween, Callback callback) where T : Tween
-    {
-        if (tween.enabled || !tween.IsComplete) {
-            tween.OnComplete += callback;
-        }
-        else {
-            callback();
-        }
-        return tween;
-    }
-    
     public static T Delay<T>(this T tween, float delay) where T : Tween
     {
         tween.DelayTime = delay;
@@ -25,6 +14,17 @@ public static class FluentSyntax
     {
         if (!animated) {
             tween.Skip();
+        }
+        return tween;
+    }
+
+    public static T Then<T>(this T tween, Callback callback) where T : Tween
+    {
+        if (tween.enabled || !tween.IsComplete) {
+            tween.OnComplete += callback;
+        }
+        else {
+            callback();
         }
         return tween;
     }
