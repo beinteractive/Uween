@@ -17,6 +17,8 @@ public class Example : MonoBehaviour
 
     void animate()
     {
+        Debug.Log("Animate");
+
         // Move X - One Shot
         // TweenX.Add(image, 1f, Random.Range(Screen.width / -2f, Screen.width / 2f));
 
@@ -52,5 +54,8 @@ public class Example : MonoBehaviour
         
         // Rotation Z - Repeat - Ease In Out Sine - With Delay
         // TweenRZ.Add(image, 1f, Random.Range(-360f, 360f)).EaseInOutSine().Delay(0.5f).Then(animate);
+
+        // Simply Wait & Callback
+        // TweenNull.Add(image, 1f).Then(animate);
     }
 }
