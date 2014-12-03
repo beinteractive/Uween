@@ -78,11 +78,11 @@ TweenX.Add(gameObject, 1f, 100f).EaseInOutSine().Delay(0.5f).Then(next_motion);
 
 ### Easings
 
-It implements all of Robert Penner's easings:
+You can use all of Robert Penner's easings:
 
 todo
 
-Also some special easings:
+and also some special easings:
 
 todo
 
@@ -96,13 +96,13 @@ You can insert a delay time before starting tween.
 
 You can set to call method you like when tween completed.
 
- - `.Then(Method)` - Set a complete callback.
+ - `.Then(f)` - Set a complete callback. `f` is a no arg void method.
 
 ### Initial value
 
 You can set a initial value. It will be apply immediately to GameObject (before delay).
 
- - `.From(float/Vector3)` - Set a initial value.
+ - `.From(v)` - Set a initial value to `v`.
 
 ### Relative value
 
