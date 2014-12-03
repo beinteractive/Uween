@@ -27,7 +27,7 @@ public class Example : MonoBehaviour
         // TweenX.Add(image, 1f, Random.Range(Screen.width / -2f, Screen.width / 2f)).EaseInOutSine().Then(animate);
 
         // Move X - Repeat - Ease In Out Sine - With Delay
-        // TweenX.Add(image, 1f, Random.Range(Screen.width / -2f, Screen.width / 2f)).EaseInOutSine().Delay(0.5f).Then(animate);
+        TweenX.Add(image, 1f, Random.Range(Screen.width / -2f, Screen.width / 2f)).EaseInOutSine().Delay(0.5f).Then(animate);
 
         // Move X - Repeat - Ease In Out Sine - With Delay - With First Position
         // TweenX.Add(image, 1f, Random.Range(Screen.width / -2f, Screen.width / 2f)).EaseInOutSine().Delay(0.5f).From(0f).Then(animate);
@@ -42,6 +42,12 @@ public class Example : MonoBehaviour
         // TweenX.Add(image, 1f, 60f).FromThatBy().EaseInOutSine().Then(animate);
 
         // Move Y - Repeat - Ease In Out Sine - With Delay
-        TweenY.Add(image, 1f, Random.Range(Screen.height / -2f, Screen.height / 2f)).EaseInOutSine().Delay(0.5f).Then(animate);
+        // TweenY.Add(image, 1f, Random.Range(Screen.height / -2f, Screen.height / 2f)).EaseInOutSine().Delay(0.5f).Then(animate);
+        
+        // Scale X - Repeat - Ease In Out Sine - With Delay
+        // TweenSX.Add(image, 1f, Random.Range(0.5f, 2f)).EaseInOutSine().Delay(0.5f).Then(animate);
+        
+        // Scale Y - Repeat - Ease In Out Sine - With Delay
+        // TweenSY.Add(image, 1f, Random.Range(0.5f, 2f)).EaseInOutSine().Delay(0.5f).Then(animate);
     }
 }
