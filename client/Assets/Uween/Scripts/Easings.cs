@@ -17,13 +17,167 @@ public static class Linear
 {
     public static readonly Easings EaseNone = new LinearEaseNone();
 }
+public static class Back
+{
+    public static readonly Easings EaseIn = new BackEaseIn();
+    public static readonly Easings EaseInOut = new BackEaseInOut();
+    public static readonly Easings EaseOut = new BackEaseOut();
+    public static readonly Easings EaseOutIn = new BackEaseOutIn();
+
+    public static T EaseInBack<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseIn;
+        return tween;
+    }
+    public static T EaseInOutBack<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseInOut;
+        return tween;
+    }
+    public static T EaseOutBack<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOut;
+        return tween;
+    }
+    public static T EaseOutInBack<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOutIn;
+        return tween;
+    }
+    
+    public static T EaseInBackWith<T>(this T tween, float s) where T : Tween
+    {
+        tween.Easing = new BackEaseIn(s);
+        return tween;
+    }
+    public static T EaseInOutBackWith<T>(this T tween, float s) where T : Tween
+    {
+        tween.Easing = new BackEaseInOut(s);
+        return tween;
+    }
+    public static T EaseOutBackWith<T>(this T tween, float s) where T : Tween
+    {
+        tween.Easing = new BackEaseOut(s);
+        return tween;
+    }
+    public static T EaseOutInBack<T>(this T tween, float s) where T : Tween
+    {
+        tween.Easing = new BackEaseOutIn(s);
+        return tween;
+    }
+}
+public static class Bounce
+{
+    public static readonly Easings EaseIn = new BounceEaseIn();
+    public static readonly Easings EaseInOut = new BounceEaseInOut();
+    public static readonly Easings EaseOut = new BounceEaseOut();
+    public static readonly Easings EaseOutIn = new BounceEaseOutIn();
+    
+    public static T EaseInBounce<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseIn;
+        return tween;
+    }
+    public static T EaseInOutBounce<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseInOut;
+        return tween;
+    }
+    public static T EaseOutBounce<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOut;
+        return tween;
+    }
+    public static T EaseOutInBounce<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOutIn;
+        return tween;
+    }
+}
+public static class Circular
+{
+    public static readonly Easings EaseIn = new CircularEaseIn();
+    public static readonly Easings EaseInOut = new CircularEaseInOut();
+    public static readonly Easings EaseOut = new CircularEaseOut();
+    public static readonly Easings EaseOutIn = new CircularEaseOutIn();
+    
+    public static T EaseInCircular<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseIn;
+        return tween;
+    }
+    public static T EaseInOutCircular<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseInOut;
+        return tween;
+    }
+    public static T EaseOutCircular<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOut;
+        return tween;
+    }
+    public static T EaseOutInCircular<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOutIn;
+        return tween;
+    }
+    
+    public static T EaseInCirc<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseIn;
+        return tween;
+    }
+    public static T EaseInOutCirc<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseInOut;
+        return tween;
+    }
+    public static T EaseOutCirc<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOut;
+        return tween;
+    }
+    public static T EaseOutInCirc<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOutIn;
+        return tween;
+    }
+}
+public static class Cubic
+{
+    public static readonly Easings EaseIn = new CubicEaseIn();
+    public static readonly Easings EaseInOut = new CubicEaseInOut();
+    public static readonly Easings EaseOut = new CubicEaseOut();
+    public static readonly Easings EaseOutIn = new CubicEaseOutIn();
+    
+    public static T EaseInCubic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseIn;
+        return tween;
+    }
+    public static T EaseInOutCubic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseInOut;
+        return tween;
+    }
+    public static T EaseOutCubic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOut;
+        return tween;
+    }
+    public static T EaseOutInCubic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOutIn;
+        return tween;
+    }
+}
 public static class Sine
 {
     public static readonly Easings EaseIn = new SineEaseIn();
     public static readonly Easings EaseInOut = new SineEaseInOut();
     public static readonly Easings EaseOut = new SineEaseOut();
     public static readonly Easings EaseOutIn = new SineEaseOutIn();
-
+    
     public static T EaseInSine<T>(this T tween) where T : Tween
     {
         tween.Easing = EaseIn;
@@ -51,6 +205,240 @@ public class LinearEaseNone : Easings
     override public float Calculate(float t, float b, float c, float d)
     {
         return c * t / d + b;
+    }
+}
+
+public class BackEaseIn : Easings
+{
+    public BackEaseIn()
+    {
+    }
+    public BackEaseIn(float s)
+    {
+        this.s = s;
+    }
+
+    public float s = 1.70158f;
+
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        return c * (t /= d) * t * ((s + 1f) * t - s) + b;
+    }
+}
+public class BackEaseInOut : Easings
+{
+    public BackEaseInOut()
+    {
+    }
+    public BackEaseInOut(float s)
+    {
+        this.s = s;
+    }
+    
+    public float s = 1.70158f;
+    
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        if ((t /= d / 2f) < 1f) {
+            return c / 2f * (t * t * (((s * 1.525f) + 1f) * t - s * 1.525f)) + b;
+        }
+        return c / 2f * ((t -= 2f) * t * (((s * 1.525f) + 1f) * t + s * 1.525f) + 2f) + b;
+    }
+}
+public class BackEaseOut : Easings
+{
+    public BackEaseOut()
+    {
+    }
+    public BackEaseOut(float s)
+    {
+        this.s = s;
+    }
+    
+    public float s = 1.70158f;
+    
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        return c * ((t = t / d - 1f) * t * ((s + 1f) * t + s) + 1f) + b;
+    }
+}
+public class BackEaseOutIn : Easings
+{
+    public BackEaseOutIn()
+    {
+    }
+    public BackEaseOutIn(float s)
+    {
+        this.s = s;
+    }
+    
+    public float s = 1.70158f;
+    
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        if (t < d / 2f) {
+            return (c / 2f) * ((t = (t * 2f) / d - 1f) * t * ((s + 1f) * t + s) + 1f) + b;
+        }
+        return (c / 2f) * (t = (t * 2f - d) / d) * t * ((s + 1f) * t - s) + (b + c / 2f);
+    }
+}
+
+public class BounceEaseIn : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        if ((t = (d - t) / d) < (1f / 2.75f)) {
+            return c - (c * (7.5625f * t * t)) + b;
+        }
+        if (t < (2f / 2.75f)) {
+            return c - (c * (7.5625f * (t -= (1.5f / 2.75f)) * t + 0.75f)) + b;
+        }
+        if (t < (2.5f / 2.75f)) {
+            return c - (c * (7.5625f * (t -= (2.25f / 2.75f)) * t + 0.9375f)) + b;
+        }
+        return c - (c * (7.5625f * (t -= (2.625f / 2.75f)) * t + 0.984375f)) + b;
+    }
+}
+public class BounceEaseInOut : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        if (t < d / 2f) {
+            if ((t = (d - t * 2f) / d) < (1f / 2.75f)) {
+                return (c - (c * (7.5625f * t * t))) * 0.5f + b;
+            }
+            if (t < (2f / 2.75f)) {
+                return (c - (c * (7.5625f * (t -= (1.5f / 2.75f)) * t + 0.75f))) * 0.5f + b;
+            }
+            if (t < (2.5f / 2.75f)) {
+                return (c - (c * (7.5625f * (t -= (2.25f / 2.75f)) * t + 0.9375f))) * 0.5f + b;
+            }
+            return (c - (c * (7.5625f * (t -= (2.625f / 2.75f)) * t + 0.984375f))) * 0.5f + b;
+        }
+        else {
+            if ((t = (t * 2f - d) / d) < (1f / 2.75f)) {
+                return (c * (7.5625f * t * t)) * 0.5f + c * 0.5f + b;
+            }
+            if (t < (2f / 2.75f)) {
+                return (c * (7.5625f * (t -= (1.5f / 2.75f)) * t + 0.75f)) * 0.5f + c * 0.5f + b;
+            }
+            if (t < (2.5f / 2.75f)) {
+                return (c * (7.5625f * (t -= (2.25f / 2.75f)) * t + 0.9375f)) * 0.5f + c * 0.5f + b;
+            }
+            return (c * (7.5625f * (t -= (2.625f / 2.75f)) * t + 0.984375f)) * 0.5f + c * 0.5f + b;
+        }
+        
+    }
+}
+public class BounceEaseOut : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        if ((t /= d) < (1f / 2.75f)) {
+            return c * (7.5625f * t * t) + b;
+        }
+        if (t < (2f / 2.75f)) {
+            return c * (7.5625f * (t -= (1.5f / 2.75f)) * t + 0.75f) + b;
+        }
+        if (t < (2.5f / 2.75f)) {
+            return c * (7.5625f * (t -= (2.25f / 2.75f)) * t + 0.9375f) + b;
+        }
+        return c * (7.5625f * (t -= (2.625f / 2.75f)) * t + 0.984375f) + b;
+    }
+}
+public class BounceEaseOutIn : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        if (t < d / 2f) {
+            if ((t = (t * 2f) / d) < (1f / 2.75f)) {
+                return (c / 2f) * (7.5625f * t * t) + b;
+            }
+            if (t < (2f / 2.75f)) {
+                return (c / 2f) * (7.5625f * (t -= (1.5f / 2.75f)) * t + 0.75f) + b;
+            }
+            if (t < (2.5f / 2.75f)) {
+                return (c / 2f) * (7.5625f * (t -= (2.25f / 2.75f)) * t + 0.9375f) + b;
+            }
+            return (c / 2f) * (7.5625f * (t -= (2.625f / 2.75f)) * t + 0.984375f) + b;
+        }
+        else {
+            if ((t = (d - (t * 2f - d)) / d) < (1f / 2.75f)) {
+                return (c / 2f) - ((c / 2f) * (7.5625f * t * t)) + (b + c / 2f);
+            }
+            if (t < (2f / 2.75f)) {
+                return (c / 2f) - ((c / 2f) * (7.5625f * (t -= (1.5f / 2.75f)) * t + 0.75f)) + (b + c / 2f);
+            }
+            if (t < (2.5f / 2.75f)) {
+                return (c / 2f) - ((c / 2f) * (7.5625f * (t -= (2.25f / 2.75f)) * t + 0.9375f)) + (b + c / 2f);
+            }
+            return (c / 2f) - ((c / 2f) * (7.5625f * (t -= (2.625f / 2.75f)) * t + 0.984375f)) + (b + c / 2f);
+        }
+        
+    }
+}
+
+public class CircularEaseIn : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        return -c * (Mathf.Sqrt(1f - (t /= d) * t) - 1f) + b;
+    }
+}
+public class CircularEaseInOut : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        if ((t /= d / 2f) < 1f) {
+            return -c / 2f * (Mathf.Sqrt(1f - t * t) - 1f) + b;
+        }
+        return c / 2f * (Mathf.Sqrt(1f - (t -= 2f) * t) + 1f) + b;
+    }
+}
+public class CircularEaseOut : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        return c * Mathf.Sqrt(1f - (t = t / d - 1f) * t) + b;
+    }
+}
+public class CircularEaseOutIn : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        if (t < d / 2f) {
+            return (c / 2f) * Mathf.Sqrt(1f - (t = (t * 2f) / d - 1f) * t) + b;
+        }
+        return -(c / 2f) * (Mathf.Sqrt(1f - (t = (t * 2f - d) / d) * t) - 1f) + (b + c / 2f);
+    }
+}
+
+public class CubicEaseIn : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        return c * (t /= d) * t * t + b;
+    }
+}
+public class CubicEaseInOut : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        return ((t /= d / 2f) < 1f) ? c / 2f * t * t * t + b : c / 2f * ((t -= 2f) * t * t + 2f) + b;
+    }
+}
+public class CubicEaseOut : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        return c * ((t = t / d - 1f) * t * t + 1f) + b;
+    }
+}
+public class CubicEaseOutIn : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        return t < d / 2f ? c / 2f * ((t = t * 2f / d - 1f) * t * t + 1f) + b : c / 2f * (t = (t * 2f - d) / d) * t * t + b + c / 2f;
     }
 }
 
