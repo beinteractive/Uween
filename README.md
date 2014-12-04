@@ -35,6 +35,10 @@ It works as a simple Unity component and follows a Unity execution flow.
 Simply copy a `Uween` directory to your Unity project.
 `Uween - Example` directory is not needed.
 
+If you don't use uGUI (requires Unity >= 4.6), delete the following files:
+
+ - `Uween/Scripts/TweenA.cs`
+
 ## Examples
 
 Open a `Uween - Example/Scenes/Example.unity` scene.
@@ -129,6 +133,8 @@ For example, TweenX has a destination x value as 3rd parameter.
   - `TweenR3.Add(g, d, Vector2 xyz)` - Same as `TweenRXYZ.Add(g, d, Vector2 xyz)`.
   - `TweenR3.Add(g, d, float x, float y, float z)` - Same as `TweenRXYZ.Add(g, d, float x, float y, float z)`.
   - `TweenR3.Add(g, d, float v)` - Same as `TweenRXYZ.Add(g, d, float v)`.
+ - uGUI
+  - `TweenA.Add(g, d, float a)` - Change Alpha to value `a`.
 
 Note: `g` is GameObject, `d` is duration.
 
