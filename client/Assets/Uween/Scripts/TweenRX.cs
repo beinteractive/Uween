@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TweenRX : TweenVec1R<TweenRX>
+public class TweenRX : TweenVec1R
 {
     public static TweenRX Add(GameObject g, float duration, float to)
     {

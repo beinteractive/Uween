@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class TweenVec3T<T> : TweenVec3<T>
+public abstract class TweenVec3T : TweenVec3
 {
     public abstract Vector3 vector { get; set; }
     
@@ -28,7 +28,7 @@ public abstract class TweenVec3T<T> : TweenVec3<T>
     }
 }
 
-public abstract class TweenVec3P<T> : TweenVec3T<T>
+public abstract class TweenVec3P : TweenVec3T
 {
     override public Vector3 vector
     {
@@ -43,7 +43,7 @@ public abstract class TweenVec3P<T> : TweenVec3T<T>
     }
 }
 
-public abstract class TweenVec3R<T> : TweenVec3T<T>
+public abstract class TweenVec3R : TweenVec3T
 {
     override public Vector3 vector
     {
@@ -58,7 +58,7 @@ public abstract class TweenVec3R<T> : TweenVec3T<T>
     }
 }
 
-public abstract class TweenVec3S<T> : TweenVec3T<T>
+public abstract class TweenVec3S : TweenVec3T
 {
     override public Vector3 vector
     {

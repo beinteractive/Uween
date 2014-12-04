@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class TweenVec3<T> : Tween
+public abstract class TweenVec3 : Tween
 {
-    protected static G Add<G>(GameObject g, float duration, Vector3 to) where G : TweenVec3<G>
+    protected static G Add<G>(GameObject g, float duration, Vector3 to) where G : TweenVec3
     {
         var t = Tween.Get<G>(g, duration);
         t.to = to;
         return t;
     }
     
-    protected static G Add<G>(GameObject g, float duration, float x, float y, float z) where G : TweenVec3<G>
+    protected static G Add<G>(GameObject g, float duration, float x, float y, float z) where G : TweenVec3
     {
         return Add<G>(g, duration, new Vector3(x, y, z));
     }
@@ -32,56 +32,56 @@ public abstract class TweenVec3<T> : Tween
         value = from + (to - from) * f;
     }
     
-    public T By()
+    public TweenVec3 By()
     {
         to += value;
-        return (T)(object)this;
+        return this;
     }
     
-    public T From(Vector3 v)
+    public TweenVec3 From(Vector3 v)
     {
         from = v;
         value = v;
-        return (T)(object)this;
+        return this;
     }
     
-    public T From(float x, float y, float z)
+    public TweenVec3 From(float x, float y, float z)
     {
         return From(new Vector3(x, y, z));
     }
     
-    public T From(float v)
+    public TweenVec3 From(float v)
     {
         return From(v, v, v);
     }
     
-    public T FromBy(Vector3 v)
+    public TweenVec3 FromBy(Vector3 v)
     {
         from = value + v;
-        return (T)(object)this;
+        return this;
     }
     
-    public T FromBy(float x, float y, float z)
+    public TweenVec3 FromBy(float x, float y, float z)
     {
         return FromBy(new Vector3(x, y, z));
     }
     
-    public T FromBy(float v)
+    public TweenVec3 FromBy(float v)
     {
         return FromBy(v, v, v);
     }
 
-    public T FromThat()
+    public TweenVec3 FromThat()
     {
         from = to;
         to = value;
-        return (T)(object)this;
+        return this;
     }
     
-    public T FromThatBy()
+    public TweenVec3 FromThatBy()
     {
         from = value + to;
         to = value;
-        return (T)(object)this;
+        return this;
     }
 }

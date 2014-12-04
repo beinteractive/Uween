@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class TweenVec1<T> : Tween
+public abstract class TweenVec1 : Tween
 {
-    protected static G Add<G>(GameObject g, float duration, float to) where G : TweenVec1<G>
+    protected static G Add<G>(GameObject g, float duration, float to) where G : TweenVec1
     {
         var t = Tween.Get<G>(g, duration);
         t.to = to;
@@ -27,36 +27,36 @@ public abstract class TweenVec1<T> : Tween
         value = from + (to - from) * f;
     }
 
-    public T By()
+    public TweenVec1 By()
     {
         to += value;
-        return (T)(object)this;
+        return this;
     }
 
-    public T From(float v)
+    public TweenVec1 From(float v)
     {
         from = v;
         value = v;
-        return (T)(object)this;
+        return this;
     }
     
-    public T FromBy(float v)
+    public TweenVec1 FromBy(float v)
     {
         from = value + v;
-        return (T)(object)this;
+        return this;
     }
     
-    public T FromThat()
+    public TweenVec1 FromThat()
     {
         from = to;
         to = value;
-        return (T)(object)this;
+        return this;
     }
     
-    public T FromThatBy()
+    public TweenVec1 FromThatBy()
     {
         from = value + to;
         to = value;
-        return (T)(object)this;
+        return this;
     }
 }
