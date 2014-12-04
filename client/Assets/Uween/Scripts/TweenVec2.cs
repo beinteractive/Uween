@@ -1,52 +1,67 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class TweenVec2 : TweenVec<Vector2>
+public abstract class TweenVec2<T> : Tween
 {
-    protected static T Add<T>(GameObject g, float duration, Vector2 to) where T : TweenVec2
+    protected static G Add<G>(GameObject g, float duration, Vector2 to) where G : TweenVec2<G>
     {
-        return Add<T, Vector2>(g, duration, to);
+        var t = Tween.Get<G>(g, duration);
+        t.to = to;
+        return t;
     }
-
-    protected static T Add<T>(GameObject g, float duration, float v1, float v2) where T : TweenVec2
+    
+    protected static G Add<G>(GameObject g, float duration, float v1, float v2) where G : TweenVec2<G>
     {
-        return Add<T>(g, duration, new Vector2(v1, v2));
+        return Add<G>(g, duration, new Vector2(v1, v2));
+    }
+    
+    public Vector2 from;
+    public Vector2 to;
+    
+    public abstract Vector2 value { get; set; }
+    
+    override protected void Reset()
+    {
+        base.Reset();
+        from = value;
+        to = value;
     }
     
     override protected void UpdateValue(float f)
     {
         value = from + (to - from) * f;
     }
-}
-
-public static class TweenVec2Extensions
-{
-    public static T By<T>(this T tween) where T : TweenVec2
+    
+    public T By()
     {
-        tween.to += tween.value;
-        return tween;
+        to += value;
+        return (T)(object)this;
     }
     
-    public static T FromBy<T>(this T tween, Vector2 from) where T : TweenVec2
+    public T From(Vector2 v)
     {
-        tween.from = tween.value + from;
-        return tween;
+        from = v;
+        value = v;
+        return (T)(object)this;
     }
     
-    public static T FromBy<T>(this T tween, float fromV1, float fromV2) where T : TweenVec2
+    public T FromBy(Vector2 v)
     {
-        return FromBy<T>(tween, new Vector2(fromV1, fromV2));
-    }
-
-    public static T FromThat<T>(this T tween) where T : TweenVec2
-    {
-        return tween.FromThat<T, Vector2>();
+        from = value + v;
+        return (T)(object)this;
     }
     
-    public static T FromThatBy<T>(this T tween) where T : TweenVec2
+    public T FromThat()
     {
-        tween.from = tween.value + tween.to;
-        tween.to = tween.value;
-        return tween;
+        from = to;
+        to = value;
+        return (T)(object)this;
+    }
+    
+    public T FromThatBy()
+    {
+        from = value + to;
+        to = value;
+        return (T)(object)this;
     }
 }

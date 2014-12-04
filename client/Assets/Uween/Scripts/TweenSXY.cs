@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TweenSXY : TweenVec2S
+public class TweenSXY : TweenVec2S<TweenSXY>
 {
     public static TweenSXY Add(GameObject g, float duration, Vector2 to)
     {

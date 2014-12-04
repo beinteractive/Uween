@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class TweenVec2R : TweenVec2
+public abstract class TweenVec2R<T> : TweenVec2T<T>
 {
     override public Vector3 vector
     {

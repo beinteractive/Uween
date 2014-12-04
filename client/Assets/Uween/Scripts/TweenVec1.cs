@@ -1,42 +1,62 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class TweenVec1 : TweenVec<float>
+public abstract class TweenVec1<T> : Tween
 {
-    protected static T Add<T>(GameObject g, float duration, float to) where T : TweenVec1
+    protected static G Add<G>(GameObject g, float duration, float to) where G : TweenVec1<G>
     {
-        return Add<T, float>(g, duration, to);
+        var t = Tween.Get<G>(g, duration);
+        t.to = to;
+        return t;
+    }
+    
+    public float from;
+    public float to;
+    
+    public abstract float value { get; set; }
+
+    override protected void Reset()
+    {
+        base.Reset();
+        from = value;
+        to = value;
     }
 
     override protected void UpdateValue(float f)
     {
         value = from + (to - from) * f;
     }
-}
 
-public static class TweenVec1Extensions
-{
-    public static T By<T>(this T tween) where T : TweenVec1
+    public T By()
     {
-        tween.to += tween.value;
-        return tween;
+        to += value;
+        return (T)(object)this;
     }
 
-    public static T FromBy<T>(this T tween, float from) where T : TweenVec1
+    public T From(float v)
     {
-        tween.from = tween.value + from;
-        return tween;
+        from = v;
+        value = v;
+        return (T)(object)this;
     }
     
-    public static T FromThat<T>(this T tween) where T : TweenVec1
+    public T FromBy(float v)
     {
-        return tween.FromThat<T, float>();
+        from = value + v;
+        return (T)(object)this;
     }
-
-    public static T FromThatBy<T>(this T tween) where T : TweenVec1
+    
+    public T FromThat()
     {
-        tween.from = tween.value + tween.to;
-        tween.to = tween.value;
-        return tween;
+        from = to;
+        to = value;
+        return (T)(object)this;
+    }
+    
+    public T FromThatBy()
+    {
+        from = value + to;
+        to = value;
+        return (T)(object)this;
     }
 }
