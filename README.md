@@ -118,21 +118,13 @@ For example, TweenX has a destination x value as 3rd parameter.
   - `TweenRXYZ.Add(g, d, float x, float y, float z)` - Rotate XYZ to values `x`, `y` and `z`.
   - `TweenRXYZ.Add(g, d, float v)` - Rotate XYZ to value `v`.
  - Alias for 2D
-  - `TweenP.Add(g, d, Vector2 xy)` - Same as `TweenXY.Add(g, d, Vector2 xy)`.
-  - `TweenP.Add(g, d, float x, float y)` - Same as `TweenXY.Add(g, d, float x, float y)`.
-  - `TweenS.Add(g, d, Vector2 xy)` - Same as `TweenSXY.Add(g, d, Vector2 xy)`.
-  - `TweenS.Add(g, d, float x, float y)` - Same as `TweenSXY.Add(g, d, float x, float y)`.
-  - `TweenS.Add(g, d, float v)` - Same as `TweenSXY.Add(g, d, float v)`.
-  - `TweenR.Add(g, d, float rz)` - Same as `TweenRZ.Add(g, d, float rz)`.
+  - `TweenP` - Same as `TweenXY`.
+  - `TweenS` - Same as `TweenSXY`.
+  - `TweenR` - Same as `TweenRZ`.
  - Alias for 3D
-  - `TweenP3.Add(g, d, Vector3 xyz)` - Same as `TweenXYZ.Add(g, d, Vector3 xyz)`.
-  - `TweenP3.Add(g, d, float x, float y, float z)` - Same as `TweenXYZ.Add(g, d, float x, float y, float z)`.
-  - `TweenS3.Add(g, d, Vector2 xyz)` - Same as `TweenSXYZ.Add(g, d, Vector2 xyz)`.
-  - `TweenS3.Add(g, d, float x, float y, float z)` - Same as `TweenSXYZ.Add(g, d, float x, float y, float z)`.
-  - `TweenS3.Add(g, d, float v)` - Same as `TweenSXYZ.Add(g, d, float v)`.
-  - `TweenR3.Add(g, d, Vector2 xyz)` - Same as `TweenRXYZ.Add(g, d, Vector2 xyz)`.
-  - `TweenR3.Add(g, d, float x, float y, float z)` - Same as `TweenRXYZ.Add(g, d, float x, float y, float z)`.
-  - `TweenR3.Add(g, d, float v)` - Same as `TweenRXYZ.Add(g, d, float v)`.
+  - `TweenP3` - Same as `TweenXYZ`.
+  - `TweenS3` - Same as `TweenSXYZ`.
+  - `TweenR3` - Same as `TweenRXYZ`.
  - uGUI
   - `TweenA.Add(g, d, float a)` - Change Alpha to value `a`.
 
@@ -176,7 +168,7 @@ You can set to call method you like when tween completed.
 You can set a initial value. It will be apply immediately to GameObject (before delay).
 
  - `.From(v)` - Set a initial value to `v`.
- - `.FromThat()` - Set a initial value to destination Value and destination value to current Value.
+ - `.FromThat()` - Set a initial value to destination value and destination value to current Value.
 
 ### Relative value
 
