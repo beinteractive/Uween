@@ -63,7 +63,77 @@ For example, TweenX has a destination x value as 3rd parameter.
 
 ### Tween classes
 
-todo
+ - `TweenX.Add(g, d, float x)` - Move X to value `x`.
+ - `TweenY.Add(g, d, float y)` - Move Y to value `y`.
+ - `TweenZ.Add(g, d, float z)` - Move Z to value `z`.
+
+ - `TweenSX.Add(g, d, float sx)` - Scale X to value `sx`.
+ - `TweenSY.Add(g, d, float sy)` - Scale Y to value `sy`.
+ - `TweenSZ.Add(g, d, float sz)` - Scale Z to value `sz`.
+
+ - `TweenRX.Add(g, d, float rx)` - Rotate X to value `rx`. `rx` is a euler angle.
+ - `TweenRY.Add(g, d, float ry)` - Rotate Y to value `ry`. `ry` is a euler angle.
+ - `TweenRZ.Add(g, d, float rz)` - Rotate Z to value `rz`. `rz` is a euler angle.
+
+ - `TweenXY.Add(g, d, Vector2 xy)` - Move XY to value `xy`.
+ - `TweenXY.Add(g, d, float x, float y)` - Move XY to values `x` and `y`.
+ - `TweenXZ.Add(g, d, Vector2 xz)` - Move XZ to value `xz`.
+ - `TweenXZ.Add(g, d, float x, float z)` - Move XZ to values `x` and `z`.
+ - `TweenYZ.Add(g, d, Vector2 yz)` - Move XY to value `yz`.
+ - `TweenYZ.Add(g, d, float y, float z)` - Move XY to values `y` and `z`.
+
+ - `TweenSXY.Add(g, d, Vector2 xy)` - Scale XY to value `xy`.
+ - `TweenSXY.Add(g, d, float x, float y)` - Scale XY to values `x` and `y`.
+ - `TweenSXY.Add(g, d, float v)` - Scale XY to value `v`.
+ - `TweenSXZ.Add(g, d, Vector2 xz)` - Scale XZ to value `xz`.
+ - `TweenSXZ.Add(g, d, float v)` - Scale XZ to value `v`.
+ - `TweenSXZ.Add(g, d, float x, float z)` - Scale XZ to values `x` and `z`.
+ - `TweenSYZ.Add(g, d, Vector2 yz)` - Scale XY to value `yz`.
+ - `TweenSYZ.Add(g, d, float y, float z)` - Scale XY to values `y` and `z`.
+ - `TweenSYZ.Add(g, d, float v)` - Scale YZ to value `v`.
+
+ - `TweenRXY.Add(g, d, Vector2 xy)` - Rotate XY to value `xy`.
+ - `TweenRXY.Add(g, d, float x, float y)` - Rotate XY to values `x` and `y`.
+ - `TweenRXY.Add(g, d, float v)` - Rotate XY to value `v`.
+ - `TweenRXZ.Add(g, d, Vector2 xz)` - Rotate XZ to value `xz`.
+ - `TweenRXZ.Add(g, d, float v)` - Rotate XZ to value `v`.
+ - `TweenRXZ.Add(g, d, float x, float z)` - Rotate XZ to values `x` and `z`.
+ - `TweenRYZ.Add(g, d, Vector2 yz)` - Rotate XY to value `yz`.
+ - `TweenRYZ.Add(g, d, float y, float z)` - Rotate XY to values `y` and `z`.
+ - `TweenRYZ.Add(g, d, float v)` - Rotate YZ to value `v`.
+
+ - `TweenXYZ.Add(g, d, Vector3 xyz)` - Move XYZ to value `xyz`.
+ - `TweenXYZ.Add(g, d, float x, float y, float z)` - Move XYZ to values `x`, `y` and `z`.
+
+ - `TweenSXYZ.Add(g, d, Vector2 xyz)` - Scale XYZ to value `xyz`.
+ - `TweenSXYZ.Add(g, d, float x, float y, float z)` - Scale XYZ to values `x`, `y` and `z`.
+ - `TweenSXYZ.Add(g, d, float v)` - Scale XYZ to value `v`.
+
+ - `TweenRXYZ.Add(g, d, Vector2 xyz)` - Rotate XYZ to value `xy`.
+ - `TweenRXYZ.Add(g, d, float x, float y, float z)` - Rotate XYZ to values `x`, `y` and `z`.
+ - `TweenRXYZ.Add(g, d, float v)` - Rotate XYZ to value `v`.
+
+ - `TweenP.Add(g, d, Vector2 xy)` - Same as `TweenXY.Add(g, d, Vector2 xy)`.
+ - `TweenP.Add(g, d, float x, float y)` - Same as `TweenXY.Add(g, d, float x, float y)`.
+
+ - `TweenS.Add(g, d, Vector2 xy)` - Same as `TweenSXY.Add(g, d, Vector2 xy)`.
+ - `TweenS.Add(g, d, float x, float y)` - Same as `TweenSXY.Add(g, d, float x, float y)`.
+ - `TweenS.Add(g, d, float v)` - Same as `TweenSXY.Add(g, d, float v)`.
+
+ - `TweenR.Add(g, d, float rz)` - Same as `TweenRZ.Add(g, d, float rz)`.
+
+ - `TweenP3.Add(g, d, Vector3 xyz)` - Same as `TweenXYZ.Add(g, d, Vector3 xyz)`.
+ - `TweenP3.Add(g, d, float x, float y, float z)` - Same as `TweenXYZ.Add(g, d, float x, float y, float z)`.
+
+ - `TweenS3.Add(g, d, Vector2 xyz)` - Same as `TweenSXYZ.Add(g, d, Vector2 xyz)`.
+ - `TweenS3.Add(g, d, float x, float y, float z)` - Same as `TweenSXYZ.Add(g, d, float x, float y, float z)`.
+ - `TweenS3.Add(g, d, float v)` - Same as `TweenSXYZ.Add(g, d, float v)`.
+
+ - `TweenR3.Add(g, d, Vector2 xyz)` - Same as `TweenRXYZ.Add(g, d, Vector2 xyz)`.
+ - `TweenR3.Add(g, d, float x, float y, float z)` - Same as `TweenRXYZ.Add(g, d, float x, float y, float z)`.
+ - `TweenR3.Add(g, d, float v)` - Same as `TweenRXYZ.Add(g, d, float v)`.
+
+Note: `g` is GameObject, `d` is duration.
 
 ### Fluent sytanx
 
