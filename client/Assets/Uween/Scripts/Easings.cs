@@ -60,7 +60,7 @@ public static class Back
         tween.Easing = new BackEaseOut(s);
         return tween;
     }
-    public static T EaseOutInBack<T>(this T tween, float s) where T : Tween
+    public static T EaseOutInBackWith<T>(this T tween, float s) where T : Tween
     {
         tween.Easing = new BackEaseOutIn(s);
         return tween;
