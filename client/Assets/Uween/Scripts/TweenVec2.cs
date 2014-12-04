@@ -44,6 +44,16 @@ public abstract class TweenVec2<T> : Tween
         value = v;
         return (T)(object)this;
     }
+
+    public T From(float v1, float v2)
+    {
+        return From(new Vector2(v1, v2));
+    }
+
+    public T From(float v)
+    {
+        return From(v, v);
+    }
     
     public T FromBy(Vector2 v)
     {
