@@ -3,9 +3,9 @@ using System.Collections;
 
 public abstract class TweenVec1 : Tween
 {
-    protected static G Add<G>(GameObject g, float duration, float to) where G : TweenVec1
+    public static T Add<T>(GameObject g, float duration, float to) where T : TweenVec1
     {
-        var t = Tween.Get<G>(g, duration);
+        var t = Tween.Get<T>(g, duration);
         t.to = to;
         return t;
     }
