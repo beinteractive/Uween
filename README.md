@@ -145,11 +145,86 @@ TweenX.Add(gameObject, 1f, 100f).EaseInOutSine().Delay(0.5f).Then(next_motion);
 
 You can use all of Robert Penner's easings:
 
-todo
-
-and also some special easings:
-
-todo
+ - Linear
+  - It's default.
+ - Back
+  - `.EaseInBack()`
+  - `.EaseInOutBack()`
+  - `.EaseOutBack()`
+  - `.EaseOutInBack()`
+  - `.EaseInBackWith(float s)` - With the amount of overshoot `s`.
+  - `.EaseInOutBackWith(float s)` - With the amount of overshoot `s`.
+  - `.EaseOutBackWith(float s)` - With the amount of overshoot `s`.
+  - `.EaseOutInBackWith(float s)` - With the amount of overshoot `s`.
+ - Bounce
+  - `.EaseInBounce()`
+  - `.EaseInOutBounce()`
+  - `.EaseOutBounce()`
+  - `.EaseOutInBounce()`
+ - Circular
+  - `.EaseInCircular()`
+  - `.EaseInOutCircular()`
+  - `.EaseOutCircular()`
+  - `.EaseOutInCircular()`
+  - `.EaseInCirc()` - Alias
+  - `.EaseInOutCirc()` - Alias
+  - `.EaseOutCirc()` - Alias
+  - `.EaseOutInCirc()` - Alias
+ - Cubic
+  - `.EaseInCubic()`
+  - `.EaseInOutCubic()`
+  - `.EaseOutCubic()`
+  - `.EaseOutInCubic()`
+ - Elastic
+  - `.EaseInElastic()`
+  - `.EaseInOutElastic()`
+  - `.EaseOutElastic()`
+  - `.EaseOutInElastic()`
+  - `.EaseInElasticWith(float a, float p)` - With the the amplitude `a` of the sine wave and the period `p` of the sine wave.
+  - `.EaseInOutElasticWith(float a, float p)` - With the the amplitude `a` of the sine wave and the period `p` of the sine wave.
+  - `.EaseOutElasticWith(float a, float p)` - With the the amplitude `a` of the sine wave and the period `p` of the sine wave.
+  - `.EaseOutInElasticWith(float a, float p)` - With the the amplitude `a` of the sine wave and the period `p` of the sine wave.
+ - Exponential
+  - `.EaseInExponential()`
+  - `.EaseInOutExponential()`
+  - `.EaseOutExponential()`
+  - `.EaseOutInExponential()`
+  - `.EaseInExpo()` - Alias
+  - `.EaseInOutExpo()` - Alias
+  - `.EaseOutExpo()` - Alias
+  - `.EaseOutInExpo()` - Alias
+ - Quadratic
+  - `.EaseInQuadratic()`
+  - `.EaseInOutQuadratic()`
+  - `.EaseOutQuadratic()`
+  - `.EaseOutInQuadratic()`
+  - `.EaseInQuad()` - Alias
+  - `.EaseInOutQuad()` - Alias
+  - `.EaseOutQuad()` - Alias
+  - `.EaseOutInQuad()` - Alias
+ - Quartic
+  - `.EaseInQuartic()`
+  - `.EaseInOutQuartic()`
+  - `.EaseOutQuartic()`
+  - `.EaseOutInQuartic()`
+  - `.EaseInQuart()` - Alias
+  - `.EaseInOutQuart()` - Alias
+  - `.EaseOutQuart()` - Alias
+  - `.EaseOutInQuart()` - Alias
+ - Quintic
+  - `.EaseInQuintic()`
+  - `.EaseInOutQuintic()`
+  - `.EaseOutQuintic()`
+  - `.EaseOutInQuintic()`
+  - `.EaseInQuint()` - Alias
+  - `.EaseInOutQuint()` - Alias
+  - `.EaseOutQuint()` - Alias
+  - `.EaseOutInQuint()` - Alias
+ - Sine
+  - `.EaseInSine()`
+  - `.EaseInOutSine()`
+  - `.EaseOutSine()`
+  - `.EaseOutInSine()`
 
 ### Delay
 
