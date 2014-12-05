@@ -171,6 +171,251 @@ public static class Cubic
         return tween;
     }
 }
+public static class Elastic
+{
+    public static readonly Easings EaseIn = new ElasticEaseIn();
+    public static readonly Easings EaseInOut = new ElasticEaseInOut();
+    public static readonly Easings EaseOut = new ElasticEaseOut();
+    public static readonly Easings EaseOutIn = new ElasticEaseOutIn();
+    
+    public static T EaseInElastic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseIn;
+        return tween;
+    }
+    public static T EaseInOutElastic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseInOut;
+        return tween;
+    }
+    public static T EaseOutElastic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOut;
+        return tween;
+    }
+    public static T EaseOutInElastic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOutIn;
+        return tween;
+    }
+    
+    public static T EaseInElasticWith<T>(this T tween, float a, float p) where T : Tween
+    {
+        tween.Easing = new ElasticEaseIn(a, p);
+        return tween;
+    }
+    public static T EaseInOutElasticWith<T>(this T tween, float a, float p) where T : Tween
+    {
+        tween.Easing = new ElasticEaseInOut(a, p);
+        return tween;
+    }
+    public static T EaseOutElasticWith<T>(this T tween, float a, float p) where T : Tween
+    {
+        tween.Easing = new ElasticEaseOut(a, p);
+        return tween;
+    }
+    public static T EaseOutInElasticWith<T>(this T tween, float a, float p) where T : Tween
+    {
+        tween.Easing = new ElasticEaseOutIn(a, p);
+        return tween;
+    }
+}
+public static class Exponential
+{
+    public static readonly Easings EaseIn = new ExponentialEaseIn();
+    public static readonly Easings EaseInOut = new ExponentialEaseInOut();
+    public static readonly Easings EaseOut = new ExponentialEaseOut();
+    public static readonly Easings EaseOutIn = new ExponentialEaseOutIn();
+    
+    public static T EaseInExponential<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseIn;
+        return tween;
+    }
+    public static T EaseInOutExponential<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseInOut;
+        return tween;
+    }
+    public static T EaseOutExponential<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOut;
+        return tween;
+    }
+    public static T EaseOutInExponential<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOutIn;
+        return tween;
+    }
+    
+    public static T EaseInExpo<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseIn;
+        return tween;
+    }
+    public static T EaseInOutExpo<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseInOut;
+        return tween;
+    }
+    public static T EaseOutExpo<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOut;
+        return tween;
+    }
+    public static T EaseOutInExpo<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOutIn;
+        return tween;
+    }
+}
+public static class Quadratic
+{
+    public static readonly Easings EaseIn = new QuadraticEaseIn();
+    public static readonly Easings EaseInOut = new QuadraticEaseInOut();
+    public static readonly Easings EaseOut = new QuadraticEaseOut();
+    public static readonly Easings EaseOutIn = new QuadraticEaseOutIn();
+    
+    public static T EaseInQuadratic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseIn;
+        return tween;
+    }
+    public static T EaseInOutQuadratic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseInOut;
+        return tween;
+    }
+    public static T EaseOutQuadratic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOut;
+        return tween;
+    }
+    public static T EaseOutInQuadratic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOutIn;
+        return tween;
+    }
+    
+    public static T EaseInQuad<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseIn;
+        return tween;
+    }
+    public static T EaseInOutQuad<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseInOut;
+        return tween;
+    }
+    public static T EaseOutQuad<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOut;
+        return tween;
+    }
+    public static T EaseOutInQuad<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOutIn;
+        return tween;
+    }
+}
+public static class Quartic
+{
+    public static readonly Easings EaseIn = new QuarticEaseIn();
+    public static readonly Easings EaseInOut = new QuarticEaseInOut();
+    public static readonly Easings EaseOut = new QuarticEaseOut();
+    public static readonly Easings EaseOutIn = new QuarticEaseOutIn();
+    
+    public static T EaseInQuartic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseIn;
+        return tween;
+    }
+    public static T EaseInOutQuartic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseInOut;
+        return tween;
+    }
+    public static T EaseOutQuartic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOut;
+        return tween;
+    }
+    public static T EaseOutInQuartic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOutIn;
+        return tween;
+    }
+    
+    public static T EaseInQuart<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseIn;
+        return tween;
+    }
+    public static T EaseInOutQuart<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseInOut;
+        return tween;
+    }
+    public static T EaseOutQuart<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOut;
+        return tween;
+    }
+    public static T EaseOutInQuart<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOutIn;
+        return tween;
+    }
+}
+public static class Quintic
+{
+    public static readonly Easings EaseIn = new QuinticEaseIn();
+    public static readonly Easings EaseInOut = new QuinticEaseInOut();
+    public static readonly Easings EaseOut = new QuinticEaseOut();
+    public static readonly Easings EaseOutIn = new QuinticEaseOutIn();
+    
+    public static T EaseInQuintic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseIn;
+        return tween;
+    }
+    public static T EaseInOutQuintic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseInOut;
+        return tween;
+    }
+    public static T EaseOutQuintic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOut;
+        return tween;
+    }
+    public static T EaseOutInQuintic<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOutIn;
+        return tween;
+    }
+    
+    public static T EaseInQuint<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseIn;
+        return tween;
+    }
+    public static T EaseInOutQuint<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseInOut;
+        return tween;
+    }
+    public static T EaseOutQuint<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOut;
+        return tween;
+    }
+    public static T EaseOutInQuint<T>(this T tween) where T : Tween
+    {
+        tween.Easing = EaseOutIn;
+        return tween;
+    }
+}
 public static class Sine
 {
     public static readonly Easings EaseIn = new SineEaseIn();
@@ -439,6 +684,327 @@ public class CubicEaseOutIn : Easings
     override public float Calculate(float t, float b, float c, float d)
     {
         return t < d / 2f ? c / 2f * ((t = t * 2f / d - 1f) * t * t + 1f) + b : c / 2f * (t = (t * 2f - d) / d) * t * t + b + c / 2f;
+    }
+}
+
+public class ElasticEaseIn : Easings
+{
+    public ElasticEaseIn()
+    {
+    }
+    public ElasticEaseIn(float a, float p)
+    {
+        this.a = a;
+        this.p = p;
+    }
+
+    public float a = 0f;
+    public float p = 0f;
+
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        if (t == 0f) {
+            return b;
+        }
+        if ((t /= d) == 1) {
+            return b + c;
+        }
+        if (p == 0f) {
+            p = d * 0.3f;
+        }
+        float s;
+        if (a == 0f || a < Mathf.Abs(c)) {
+            a = c;
+            s = p / 4f;
+        }
+        else {
+            s = p / (2f * Mathf.PI) * Mathf.Asin(c / a);
+        }
+        return -(a * Mathf.Pow(2f, 10f * (t -= 1f)) * Mathf.Sin((t * d - s) * (2f * Mathf.PI) / p)) + b;
+        
+    }
+}
+public class ElasticEaseInOut : Easings
+{
+    public ElasticEaseInOut()
+    {
+    }
+    public ElasticEaseInOut(float a, float p)
+    {
+        this.a = a;
+        this.p = p;
+    }
+    
+    public float a = 0f;
+    public float p = 0f;
+    
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        if (t == 0f) {
+            return b;
+        }
+        if ((t /= d / 2f) == 2f) {
+            return b + c;
+        }
+        if (p == 0f) {
+            p = d * (0.3f * 1.5f);
+        }
+        float s;
+        if (a == 0f || a < Mathf.Abs(c)) {
+            a = c;
+            s = p / 4f;
+        }
+        else {
+            s = p / (2f * Mathf.PI) * Mathf.Asin(c / a);
+        }
+        if (t < 1f) {
+            return -0.5f * (a * Mathf.Pow(2f, 10f * (t -= 1f)) * Mathf.Sin((t * d - s) * (2f * Mathf.PI) / p)) + b;
+        }
+        return a * Mathf.Pow(2f, -10f * (t -= 1f)) * Mathf.Sin((t * d - s) * (2f * Mathf.PI) / p) * 0.5f + c + b;
+    }
+}
+public class ElasticEaseOut : Easings
+{
+    public ElasticEaseOut()
+    {
+    }
+    public ElasticEaseOut(float a, float p)
+    {
+        this.a = a;
+        this.p = p;
+    }
+    
+    public float a = 0f;
+    public float p = 0f;
+    
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        if (t == 0f) {
+            return b;
+        }
+        if ((t /= d) == 1f) {
+            return b + c;
+        }
+        if (p == 0f) {
+            p = d * 0.3f;
+        }
+        float s;
+        if (a == 0f || a < Mathf.Abs(c)) {
+            a = c;
+            s = p / 4f;
+        }
+        else {
+            s = p / (2f * Mathf.PI) * Mathf.Asin(c / a);
+        }
+        return a * Mathf.Pow(2f, -10f * t) * Mathf.Sin((t * d - s) * (2f * Mathf.PI) / p) + c + b;
+        
+    }
+}
+public class ElasticEaseOutIn : Easings
+{
+    public ElasticEaseOutIn()
+    {
+    }
+    public ElasticEaseOutIn(float a, float p)
+    {
+        this.a = a;
+        this.p = p;
+    }
+    
+    public float a = 0f;
+    public float p = 0f;
+    
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        float s;
+
+        c /= 2f;
+        
+        if (t < d / 2f) {
+            if ((t *= 2f) == 0) {
+                return b;
+            }
+            if ((t /= d) == 1f) {
+                return b + c;
+            }
+            if (p == 0f) {
+                p = d * 0.3f;
+            }
+            if (a == 0f || a < Mathf.Abs(c)) {
+                a = c;
+                s = p / 4f;
+            }
+            else {
+                s = p / (2f * Mathf.PI) * Mathf.Asin(c / a);
+            }
+            return a * Mathf.Pow(2f, -10f * t) * Mathf.Sin((t * d - s) * (2f * Mathf.PI) / p) + c + b;
+        }
+        else {
+            if ((t = t * 2f - d) == 0f) {
+                return (b + c);
+            }
+            if ((t /= d) == 1f) {
+                return (b + c) + c;
+            }
+            if (p == 0f) {
+                p = d * 0.3f;
+            }
+            if (a == 0f || a < Mathf.Abs(c)) {
+                a = c;
+                s = p / 4f;
+            }
+            else {
+                s = p / (2f * Mathf.PI) * Mathf.Asin(c / a);
+            }
+            return -(a * Mathf.Pow(2f, 10f * (t -= 1f)) * Mathf.Sin((t * d - s) * (2f * Mathf.PI) / p)) + (b + c);
+        }
+        
+    }
+}
+
+public class ExponentialEaseIn : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        return t == 0f ? b : c * Mathf.Pow(2f, 10f * (t / d - 1f)) + b;
+    }
+}
+public class ExponentialEaseInOut : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        if (t == 0f) {
+            return b;
+        }
+        if (t == d) {
+            return b + c;
+        }
+        if ((t /= d / 2.0f) < 1.0f) {
+            return c / 2f * Mathf.Pow(2f, 10f * (t - 1f)) + b;
+        }
+        return c / 2f * (2f - Mathf.Pow(2f, -10f * --t)) + b;
+    }
+}
+public class ExponentialEaseOut : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        return t == d ? b + c : c * (1f - Mathf.Pow(2f, -10f * t / d)) + b;
+    }
+}
+public class ExponentialEaseOutIn : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        if (t < d / 2.0f) {
+            return t * 2.0f == d ? b + c / 2.0f : c / 2.0f * (1f - Mathf.Pow(2f, -10f * t * 2.0f / d)) + b;
+        }
+        return (t * 2.0f - d) == 0f ? b + c / 2.0f : c / 2.0f * Mathf.Pow(2f, 10f * ((t * 2f - d) / d - 1f)) + b + c / 2.0f;
+    }
+}
+
+public class QuadraticEaseIn : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        return c * (t /= d) * t + b;
+    }
+}
+public class QuadraticEaseInOut : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        if ((t /= d / 2f) < 1f) {
+            return c / 2f * t * t + b;
+        }
+        return -c / 2f * ((--t) * (t - 2f) - 1f) + b;
+    }
+}
+public class QuadraticEaseOut : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        return -c * (t /= d) * (t - 2f) + b;
+    }
+}
+public class QuadraticEaseOutIn : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        if (t < d / 2f) {
+            return -(c / 2f) * (t = (t * 2f / d)) * (t - 2f) + b;
+        }
+        return (c / 2f) * (t = (t * 2f - d) / d) * t + (b + c / 2f);
+    }
+}
+
+public class QuarticEaseIn : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        return c * (t /= d) * t * t * t + b;
+    }
+}
+public class QuarticEaseInOut : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        if ((t /= d / 2f) < 1f) {
+            return c / 2 * t * t * t * t + b;
+        }
+        return -c / 2f * ((t -= 2f) * t * t * t - 2f) + b;
+    }
+}
+public class QuarticEaseOut : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        return -c * ((t = t / d - 1f) * t * t * t - 1f) + b;
+    }
+}
+public class QuarticEaseOutIn : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        if (t < d / 2f) {
+            return -(c / 2f) * ((t = (t * 2f) / d - 1f) * t * t * t - 1f) + b;
+        }
+        return (c / 2f) * (t = (t * 2f - d) / d) * t * t * t + (b + c / 2f);
+    }
+}
+
+public class QuinticEaseIn : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        return c * (t /= d) * t * t * t * t + b;
+    }
+}
+public class QuinticEaseInOut : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        if ((t /= d / 2f) < 1f) {
+            return c / 2f * t * t * t * t * t + b;
+        }
+        return c / 2f * ((t -= 2f) * t * t * t * t + 2f) + b;
+    }
+}
+public class QuinticEaseOut : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        return c * ((t = t / d - 1f) * t * t * t * t + 1f) + b;
+    }
+}
+public class QuinticEaseOutIn : Easings
+{
+    override public float Calculate(float t, float b, float c, float d)
+    {
+        if (t < d / 2f) {
+            return (c / 2f) * ((t = (t * 2f) / d - 1f) * t * t * t * t + 1f) + b;
+        }
+        return (c / 2f) * (t = (t * 2f - d) / d) * t * t * t * t + (b + c / 2f);
     }
 }
 
