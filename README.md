@@ -40,6 +40,7 @@ If you don't use uGUI (requires Unity >= 4.6), delete the following files:
  - `Uween/Scripts/TweenA.cs`
  - `Uween/Scripts/TweenC.cs`
  - `Uween/Scripts/TweenCA.cs`
+ - `Uween/Scripts/TweenFillAmount.cs`
 
 ## Examples
 
@@ -135,6 +136,7 @@ For example, TweenX has a destination x value as 3rd parameter.
   - `TweenCA.Add(g, d, Color c)` - Change Color to value `c` (Alpha is not ignored).
   - `TweenCA.Add(g, d, Vector4 c)` - Change Color to value `c`.
   - `TweenCA.Add(g, d, float r, float g, float b, float a)` - Change Color to value `r`, `g`, `b` and `a`.
+  - `TweenFillAmount.Add(g, d, float to)` - Change `Image#fillAmount` to value `to`.
 
 Note: `g` is GameObject, `d` is duration.
 

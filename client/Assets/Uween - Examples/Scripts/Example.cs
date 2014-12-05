@@ -78,6 +78,12 @@ public class Example : MonoBehaviour
         // c.a = Random.Range(0f, 1f);
         // TweenCA.Add(image, 1f, c).EaseInOutSine().Delay(0.5f).Then(animate);
 
+        // Change Fill Amount - Repeat - Ease In Out Sine - With Delay - With First Value
+        // UnityEngine.UI.Image im = image.GetComponent<UnityEngine.UI.Image>();
+        // im.type = UnityEngine.UI.Image.Type.Filled;
+        // im.fillMethod = UnityEngine.UI.Image.FillMethod.Radial360;
+        // TweenFillAmount.Add(image, 1f, 1f).EaseInOutSine().Delay(0.5f).From(0f).Then(animate);
+
         // Simply Wait & Callback
         // TweenNull.Add(image, 1f).Then(animate);
     }
