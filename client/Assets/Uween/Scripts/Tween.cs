@@ -71,6 +71,11 @@ public abstract class Tween : MonoBehaviour
         delayTime = 0f;
         elapsedTime = 0f;
         easing = null;
+        if (OnComplete != null) {
+            foreach (System.Delegate d in OnComplete.GetInvocationList()) {
+                OnComplete -= (Callback)d;
+            }
+        }
     }
 
     protected virtual void Update()
