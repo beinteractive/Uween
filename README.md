@@ -38,6 +38,8 @@ Simply copy a `Uween` directory to your Unity project.
 If you don't use uGUI (requires Unity >= 4.6), delete the following files:
 
  - `Uween/Scripts/TweenA.cs`
+ - `Uween/Scripts/TweenC.cs`
+ - `Uween/Scripts/TweenCA.cs`
 
 ## Examples
 
@@ -127,6 +129,12 @@ For example, TweenX has a destination x value as 3rd parameter.
   - `TweenR3` - Same as `TweenRXYZ`.
  - uGUI
   - `TweenA.Add(g, d, float a)` - Change Alpha to value `a`.
+  - `TweenC.Add(g, d, Color c)` - Change Color to value `c` (Alpha is ignored).
+  - `TweenC.Add(g, d, Vector3 c)` - Change Color to value `c`.
+  - `TweenC.Add(g, d, float r, float g, float b)` - Change Color to value `r`, `g` and `b`.
+  - `TweenCA.Add(g, d, Color c)` - Change Color to value `c` (Alpha is not ignored).
+  - `TweenCA.Add(g, d, Vector4 c)` - Change Color to value `c`.
+  - `TweenCA.Add(g, d, float r, float g, float b, float a)` - Change Color to value `r`, `g`, `b` and `a`.
 
 Note: `g` is GameObject, `d` is duration.
 

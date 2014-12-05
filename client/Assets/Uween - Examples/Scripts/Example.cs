@@ -66,6 +66,17 @@ public class Example : MonoBehaviour
         
         // Change Alpha - Repeat - Ease In Out Sine - With Delay - With First Value
         // TweenA.Add(image, 1f, 0f).EaseInOutSine().Delay(0.5f).From(1f).Then(animate);
+        
+        // Change Color - Repeat - Ease In Out Sine - With Delay - With First Value
+        // Color[] colors = {Color.black, Color.blue, Color.cyan, Color.gray, Color.green, Color.magenta, Color.red, Color.white, Color.yellow};
+        // Color c = colors[Random.Range(0, colors.Length - 1)];
+        // TweenC.Add(image, 1f, c).EaseInOutSine().Delay(0.5f).Then(animate);
+        
+        // Change Color - Repeat - Ease In Out Sine - With Delay - With First Value
+        // Color[] colors = {Color.black, Color.blue, Color.cyan, Color.gray, Color.green, Color.magenta, Color.red, Color.white, Color.yellow};
+        // Color c = colors[Random.Range(0, colors.Length - 1)];
+        // c.a = Random.Range(0f, 1f);
+        // TweenCA.Add(image, 1f, c).EaseInOutSine().Delay(0.5f).Then(animate);
 
         // Simply Wait & Callback
         // TweenNull.Add(image, 1f).Then(animate);
