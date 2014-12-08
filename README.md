@@ -265,6 +265,15 @@ You can set a destination or initial value relative from current value.
 
 ref. Normal tween is: Current Value -> Destination Value
 
+### Pause/Resume
+
+You can pause/resume active tweens in a GameObject.
+
+ - `g.PauseTweens()` - Pause active tweens in `g`.
+ - `g.PauseTweens<T>()` - Pause active tweens of type `T` in `g`.
+ - `g.ResumeTweens()` - Resume paused tweens in `g`.
+ - `g.ResumeTweens<T>()` - Resume paused tweens of type `T` in `g`.
+
 ### TweenNull
 
 TweenNull will not tween any value. You can use this class for wait, delayed callback, etc...

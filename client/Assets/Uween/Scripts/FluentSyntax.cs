@@ -28,4 +28,32 @@ public static class FluentSyntax
         }
         return tween;
     }
+    
+    public static void PauseTweens(this GameObject g)
+    {
+        PauseTweens<Tween>(g);
+    }
+
+    public static void PauseTweens<T>(this GameObject g) where T : Tween
+    {
+        foreach (T t in g.GetComponents<T>()) {
+            if (!t.IsComplete) {
+                t.enabled = false;
+            }
+        }
+    }
+
+    public static void ResumeTweens(this GameObject g)
+    {
+        ResumeTweens<Tween>(g);
+    }
+
+    public static void ResumeTweens<T>(this GameObject g) where T : Tween
+    {
+        foreach (T t in g.GetComponents<T>()) {
+            if (!t.IsComplete) {
+                t.enabled = true;
+            }
+        }
+    }
 }
