@@ -17,7 +17,7 @@ TweenX.Add(gameObject, 1f, 100f);
 
 That's all.
 
-### Fluent sytanx
+### Fluent syntax
 
 ```C#
 // Go to x:100 in 1 second with in-out-sine easing and 5 sec delay.
@@ -140,10 +140,10 @@ For example, TweenX has a destination x value as 3rd parameter.
 
 Note: `g` is GameObject, `d` is duration.
 
-### Fluent sytanx
+### Fluent syntax
 
-All the following feature can be called with fluent sytanx.
-(Fluent sytanx is also known as method chain)
+All the following feature can be called with fluent syntax.
+(Fluent syntax is also known as method chain)
 
 Like:
 
