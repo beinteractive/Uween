@@ -87,8 +87,8 @@ For example, TweenX has a destination x value as 3rd parameter.
   - `TweenXY.Add(g, d, float x, float y)` - Move XY to values `x` and `y`.
   - `TweenXZ.Add(g, d, Vector2 xz)` - Move XZ to value `xz`.
   - `TweenXZ.Add(g, d, float x, float z)` - Move XZ to values `x` and `z`.
-  - `TweenYZ.Add(g, d, Vector2 yz)` - Move XY to value `yz`.
-  - `TweenYZ.Add(g, d, float y, float z)` - Move XY to values `y` and `z`.
+  - `TweenYZ.Add(g, d, Vector2 yz)` - Move YZ to value `yz`.
+  - `TweenYZ.Add(g, d, float y, float z)` - Move YZ to values `y` and `z`.
  - Scale 2 values
   - `TweenSXY.Add(g, d, Vector2 xy)` - Scale XY to value `xy`.
   - `TweenSXY.Add(g, d, float x, float y)` - Scale XY to values `x` and `y`.
@@ -96,7 +96,7 @@ For example, TweenX has a destination x value as 3rd parameter.
   - `TweenSXZ.Add(g, d, Vector2 xz)` - Scale XZ to value `xz`.
   - `TweenSXZ.Add(g, d, float v)` - Scale XZ to value `v`.
   - `TweenSXZ.Add(g, d, float x, float z)` - Scale XZ to values `x` and `z`.
-  - `TweenSYZ.Add(g, d, Vector2 yz)` - Scale XY to value `yz`.
+  - `TweenSYZ.Add(g, d, Vector2 yz)` - Scale YZ to value `yz`.
   - `TweenSYZ.Add(g, d, float y, float z)` - Scale XY to values `y` and `z`.
   - `TweenSYZ.Add(g, d, float v)` - Scale YZ to value `v`.
  - Rotate 2 values
@@ -106,8 +106,8 @@ For example, TweenX has a destination x value as 3rd parameter.
   - `TweenRXZ.Add(g, d, Vector2 xz)` - Rotate XZ to value `xz`.
   - `TweenRXZ.Add(g, d, float v)` - Rotate XZ to value `v`.
   - `TweenRXZ.Add(g, d, float x, float z)` - Rotate XZ to values `x` and `z`.
-  - `TweenRYZ.Add(g, d, Vector2 yz)` - Rotate XY to value `yz`.
-  - `TweenRYZ.Add(g, d, float y, float z)` - Rotate XY to values `y` and `z`.
+  - `TweenRYZ.Add(g, d, Vector2 yz)` - Rotate YZ to value `yz`.
+  - `TweenRYZ.Add(g, d, float y, float z)` - Rotate YZ to values `y` and `z`.
   - `TweenRYZ.Add(g, d, float v)` - Rotate YZ to value `v`.
  - Move 3 values
   - `TweenXYZ.Add(g, d, Vector3 xyz)` - Move XYZ to value `xyz`.
