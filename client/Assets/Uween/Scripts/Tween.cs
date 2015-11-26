@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
-using Uween;
+
+namespace Uween
+{
 
 /// <summary>
 /// A base class for Uween's tweens.
@@ -115,4 +116,6 @@ public abstract class Tween : MonoBehaviour
     }
 
     protected abstract void UpdateValue(float f);
+}
+
 }

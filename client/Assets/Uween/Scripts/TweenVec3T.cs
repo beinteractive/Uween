@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
+
+namespace Uween
+{
 
 public abstract class TweenVec3T : TweenVec3
 {
@@ -71,4 +73,6 @@ public abstract class TweenVec3S : TweenVec3T
             GetTransform().localScale = value;
         }
     }
+}
+
 }

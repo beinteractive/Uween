@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+
+namespace Uween
+{
 
 public class TweenA : TweenVec1
 {
@@ -33,4 +35,6 @@ public class TweenA : TweenVec1
             g.color = c;
         }
     }
+}
+
 }

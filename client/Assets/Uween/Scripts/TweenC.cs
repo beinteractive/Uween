@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+
+namespace Uween
+{
 
 public class TweenC : TweenVec3
 {
@@ -45,4 +47,6 @@ public class TweenC : TweenVec3
             GetGraphic().color = c;
         }
     }
+}
+
 }

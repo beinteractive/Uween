@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
+
+namespace Uween
+{
 
 public class TweenSXYZ : TweenVec3S
 {
@@ -17,4 +19,6 @@ public class TweenSXYZ : TweenVec3S
     {
         return Add(g, duration, toSXYZ, toSXYZ, toSXYZ);
     }
+}
+
 }

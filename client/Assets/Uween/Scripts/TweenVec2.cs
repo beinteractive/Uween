@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
+
+namespace Uween
+{
 
 public abstract class TweenVec2 : Tween
 {
@@ -84,4 +86,6 @@ public abstract class TweenVec2 : Tween
         to = value;
         return this;
     }
+}
+
 }

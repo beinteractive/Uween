@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+
+namespace Uween
+{
 
 public class TweenFillAmount : TweenVec1
 {
@@ -30,4 +32,6 @@ public class TweenFillAmount : TweenVec1
             GetImage().fillAmount = value;
         }
     }
+}
+
 }

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
+
+namespace Uween
+{
 
 public class TweenRYZ : TweenVec2R
 {
@@ -32,4 +34,6 @@ public class TweenRYZ : TweenVec2R
             vector = v;
         }
     }
+}
+
 }

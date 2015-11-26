@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
-using Uween;
+
+namespace Uween
+{
 
 public static class FluentSyntax
 {
@@ -56,4 +57,6 @@ public static class FluentSyntax
             }
         }
     }
+}
+
 }
