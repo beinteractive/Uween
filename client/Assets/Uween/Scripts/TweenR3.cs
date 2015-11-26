@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-namespace Uween
+﻿namespace Uween
 {
 
 public class TweenR3 : TweenRXYZ
