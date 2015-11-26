@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+namespace Uween
+{
+
 public abstract class TweenVec2T : TweenVec2
 {
     public abstract Vector3 vector { get; set; }
@@ -59,4 +62,6 @@ public abstract class TweenVec2S : TweenVec2T
             GetTransform().localScale = value;
         }
     }
+}
+
 }

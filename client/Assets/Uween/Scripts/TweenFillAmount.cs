@@ -2,6 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
+namespace Uween
+{
+
 public class TweenFillAmount : TweenVec1
 {
     public static TweenFillAmount Add(GameObject g, float duration, float to)
@@ -30,4 +33,6 @@ public class TweenFillAmount : TweenVec1
             GetImage().fillAmount = value;
         }
     }
+}
+
 }

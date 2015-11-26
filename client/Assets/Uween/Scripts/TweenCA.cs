@@ -2,6 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
+namespace Uween
+{
+
 public class TweenCA : TweenVec4
 {
     public static TweenCA Add(GameObject g, float duration, Vector4 to)
@@ -40,4 +43,6 @@ public class TweenCA : TweenVec4
             GetGraphic().color = value;
         }
     }
+}
+
 }

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+namespace Uween
+{
+
 public abstract class Easings
 {
     /// <summary>
@@ -1038,4 +1041,6 @@ public class SineEaseOutIn : Easings
         }
         return -(c / 2f) * Mathf.Cos((t * 2f - d) / d * (Mathf.PI / 2f)) + (c / 2f) + (b + c / 2f);
     }
+}
+
 }

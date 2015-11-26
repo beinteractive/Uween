@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using Uween;
 
 public class Example : MonoBehaviour
 {

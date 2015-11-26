@@ -2,6 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
+namespace Uween
+{
+
 public class TweenA : TweenVec1
 {
     public static TweenA Add(GameObject g, float duration, float to)
@@ -33,4 +36,6 @@ public class TweenA : TweenVec1
             g.color = c;
         }
     }
+}
+
 }

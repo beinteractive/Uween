@@ -2,6 +2,9 @@
 using System.Collections;
 using Uween;
 
+namespace Uween
+{
+
 public static class FluentSyntax
 {
     public static T Delay<T>(this T tween, float delay) where T : Tween
@@ -56,4 +59,6 @@ public static class FluentSyntax
             }
         }
     }
+}
+
 }

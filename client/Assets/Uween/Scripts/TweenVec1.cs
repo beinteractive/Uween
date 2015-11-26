@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+namespace Uween
+{
+
 public abstract class TweenVec1 : Tween
 {
     public static T Add<T>(GameObject g, float duration, float to) where T : TweenVec1
@@ -59,4 +62,6 @@ public abstract class TweenVec1 : Tween
         to = value;
         return this;
     }
+}
+
 }

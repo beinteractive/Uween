@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+namespace Uween
+{
+
 public class TweenNull : Tween
 {
     public static TweenNull Add(GameObject g, float duration)
@@ -11,4 +14,6 @@ public class TweenNull : Tween
     override protected void UpdateValue(float f)
     {
     }
+}
+
 }

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+namespace Uween
+{
+
 public class TweenX : TweenVec1P
 {
     public static TweenX Add(GameObject g, float duration, float to)
@@ -21,4 +24,6 @@ public class TweenX : TweenVec1P
             vector = v;
         }
     }
+}
+
 }
