@@ -45,6 +45,7 @@ public abstract class TweenVec1 : Tween
     public TweenVec1 FromBy(float v)
     {
         from = value + v;
+        value = from;
         return this;
     }
     
