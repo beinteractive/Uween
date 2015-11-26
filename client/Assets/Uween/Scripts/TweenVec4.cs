@@ -60,6 +60,7 @@ public abstract class TweenVec4 : Tween
     public TweenVec4 FromBy(Vector4 v)
     {
         from = value + v;
+        value = from;
         return this;
     }
     
