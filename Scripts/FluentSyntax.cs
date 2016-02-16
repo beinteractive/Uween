@@ -57,6 +57,18 @@ public static class FluentSyntax
             }
         }
     }
-}
 
+    public static void SkipTweens(this GameObject g)
+    {
+        SkipTweens<Tween>(g);
+    }
+
+    public static void SkipTweens<T>(this GameObject g) where T : Tween
+    {
+        foreach (T t in g.GetComponents<T>()) {
+            if (!t.IsComplete) {
+              t.Skip();
+            }
+        }
+    }
 }
