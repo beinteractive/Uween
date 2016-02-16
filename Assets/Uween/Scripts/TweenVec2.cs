@@ -43,7 +43,7 @@ public abstract class TweenVec2 : Tween
     public TweenVec2 From(Vector2 v)
     {
         from = v;
-        value = v;
+        value = from;
         return this;
     }
 
@@ -78,6 +78,7 @@ public abstract class TweenVec2 : Tween
     {
         from = to;
         to = value;
+        value = from;
         return this;
     }
     
@@ -85,6 +86,7 @@ public abstract class TweenVec2 : Tween
     {
         from = value + to;
         to = value;
+        value = from;
         return this;
     }
 }
