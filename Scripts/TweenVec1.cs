@@ -2,68 +2,66 @@
 
 namespace Uween
 {
+	public abstract class TweenVec1 : Tween
+	{
+		public static T Add<T>(GameObject g, float duration, float to) where T : TweenVec1
+		{
+			var t = Tween.Get<T>(g, duration);
+			t.to = to;
+			return t;
+		}
 
-public abstract class TweenVec1 : Tween
-{
-    public static T Add<T>(GameObject g, float duration, float to) where T : TweenVec1
-    {
-        var t = Tween.Get<T>(g, duration);
-        t.to = to;
-        return t;
-    }
-    
-    public float from;
-    public float to;
-    
-    public abstract float value { get; set; }
+		public float from;
+		public float to;
 
-    override protected void Reset()
-    {
-        base.Reset();
-        from = value;
-        to = value;
-    }
+		public abstract float value { get; set; }
 
-    override protected void UpdateValue(float f)
-    {
-        value = from + (to - from) * f;
-    }
+		override protected void Reset()
+		{
+			base.Reset();
+			from = value;
+			to = value;
+		}
 
-    public TweenVec1 By()
-    {
-        to += value;
-        return this;
-    }
+		override protected void UpdateValue(float f)
+		{
+			value = from + (to - from) * f;
+		}
 
-    public TweenVec1 From(float v)
-    {
-        from = v;
-        value = from;
-        return this;
-    }
-    
-    public TweenVec1 FromBy(float v)
-    {
-        from = value + v;
-        value = from;
-        return this;
-    }
-    
-    public TweenVec1 FromThat()
-    {
-        from = to;
-        to = value;
-        value = from;
-        return this;
-    }
-    
-    public TweenVec1 FromThatBy()
-    {
-        from = value + to;
-        to = value;
-        value = from;
-        return this;
-    }
-}
+		public TweenVec1 By()
+		{
+			to += value;
+			return this;
+		}
 
+		public TweenVec1 From(float v)
+		{
+			from = v;
+			value = from;
+			return this;
+		}
+
+		public TweenVec1 FromBy(float v)
+		{
+			from = value + v;
+			value = from;
+			return this;
+		}
+
+		public TweenVec1 FromThat()
+		{
+			from = to;
+			to = value;
+			value = from;
+			return this;
+		}
+
+		public TweenVec1 FromThatBy()
+		{
+			from = value + to;
+			to = value;
+			value = from;
+			return this;
+		}
+	}
 }
