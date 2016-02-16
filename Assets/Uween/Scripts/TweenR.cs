@@ -1,8 +1,6 @@
 ﻿namespace Uween
 {
-
-public class TweenR : TweenRZ
-{
-}
-
+	public class TweenR : TweenRZ
+	{
+	}
 }
