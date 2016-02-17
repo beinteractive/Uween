@@ -33,10 +33,22 @@ namespace Uween
 			value = from + (to - from) * f;
 		}
 
-		public TweenVec1 By()
+		public TweenVec1 Relative()
 		{
 			to += value;
 			return this;
+		}
+
+		public TweenVec1 FromRelative(float v)
+		{
+			from = value + v;
+			value = from;
+			return this;
+		}
+
+		public TweenVec1 By()
+		{
+			return Relative();
 		}
 
 		public TweenVec1 From(float v)
@@ -48,9 +60,7 @@ namespace Uween
 
 		public TweenVec1 FromBy(float v)
 		{
-			from = value + v;
-			value = from;
-			return this;
+			return FromRelative(v);
 		}
 
 		public TweenVec1 FromThat()
