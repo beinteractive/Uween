@@ -35,15 +35,37 @@ namespace Uween
 
 			using (new GUILayout.VerticalScope()) {
 
-				GUILayout.Space(10);
+				EditorGUILayout.Space();
 
-				using (new EditorGUI.DisabledGroupScope(player != null)) {
-					if (GUILayout.Button("Play")) {
-						Play();
+				using (new GUILayout.HorizontalScope()) {
+					if (player == null) {
+						if (GUILayout.Button("Play")) {
+							Play();
+						}
+					} else {
+						if (player.isPlaying) {
+							if (GUILayout.Button("Pause")) {
+								player.Pause();
+							}
+						} else {
+							if (GUILayout.Button("Resume")) {
+								player.Resume();
+							}
+						}
+					}
+					using (new EditorGUI.DisabledGroupScope(player == null)) {
+						if (GUILayout.Button("Stop")) {
+							player.Skip();
+						}
 					}
 				}
 
-				GUILayout.Space(10);
+				using (new GUILayout.HorizontalScope()) {
+					EditorGUILayout.LabelField("Elapsed Time");
+					EditorGUILayout.LabelField(string.Format("{0:###0.00}", player != null ? player.elapsedTime : 0f));
+				}
+
+				EditorGUILayout.Space();
 			}
 
 			serializedObject.ApplyModifiedProperties();
@@ -54,7 +76,7 @@ namespace Uween
 			EditorUpdate(() => {
 				player = new PreviewPlayer(((Preview)target).gameObject);
 				player.Play((g) => {
-					TweenX.Add(g, 1f, 200f).EaseOutQuart();
+					TweenX.Add(g, 2f, 200f).EaseOutQuart();
 				});
 				RegisterPlayerEvents();
 				livePlayers.Add(target, player);
@@ -64,6 +86,7 @@ namespace Uween
 		void RegisterPlayerEvents()
 		{
 			if (player != null) {
+				player.OnUpdate += OnPlayerUpdate;
 				player.OnStop += OnPlayerStop;
 			}
 		}
@@ -71,15 +94,23 @@ namespace Uween
 		void UnregisterPlayerEvents()
 		{
 			if (player != null) {
+				player.OnUpdate -= OnPlayerUpdate;
 				player.OnStop -= OnPlayerStop;
 			}
+		}
+
+		void OnPlayerUpdate()
+		{
+			EditorUpdate(() => {
+			});
 		}
 
 		void OnPlayerStop()
 		{
 			EditorUpdate(() => {
-				player = null;
+				UnregisterPlayerEvents();
 				livePlayers.Remove(target);
+				player = null;
 			});
 		}
 
@@ -99,6 +130,9 @@ namespace Uween
 
 		public GameObject gameObject { get; private set; }
 		public bool isPlaying { get; private set; }
+		public float elapsedTime { get; private set; }
+
+		public event Callback OnUpdate;
 		public event Callback OnStop;
 		
 		double startTime;
@@ -114,9 +148,29 @@ namespace Uween
 			Save(gameObject);
 			f(gameObject);
 			tweens = gameObject.GetComponentsInChildren<Tween>();
+			foreach (var t in tweens) {
+				t.hideFlags = HideFlags.HideAndDontSave;
+			}
 			startTime = EditorApplication.timeSinceStartup;
 			EditorApplication.update += Update;
 			Update();
+		}
+
+		public void Pause()
+		{
+			isPlaying = false;
+		}
+
+		public void Resume()
+		{
+			isPlaying = true;
+			startTime = EditorApplication.timeSinceStartup - elapsedTime;
+		}
+
+		public void Skip()
+		{
+			Resume();
+			startTime = 0f;
 		}
 
 		public void Stop()
@@ -128,6 +182,7 @@ namespace Uween
 			}
 			tweens = null;
 			Restore(gameObject);
+			OnUpdate = null;
 			if (OnStop != null) {
 				var callback = OnStop;
 				OnStop = null;
@@ -137,16 +192,21 @@ namespace Uween
 
 		void Update()
 		{
-			var elapsed = (float)(EditorApplication.timeSinceStartup - startTime);
-			var finished = true;
-			foreach (var t in tweens) {
-				if (t.enabled) {
-					finished = false;
-					t.Update(elapsed);
+			if (isPlaying) {
+				elapsedTime = (float)(EditorApplication.timeSinceStartup - startTime);
+				var finished = true;
+				foreach (var t in tweens) {
+					if (t.enabled) {
+						finished = false;
+						t.Update(elapsedTime);
+					}
 				}
-			}
-			if (finished) {
-				Stop();
+				if (OnUpdate != null) {
+					OnUpdate();
+				}
+				if (finished) {
+					Stop();
+				}
 			}
 		}
 
