@@ -429,7 +429,7 @@ namespace Uween
 				EditorGUILayout.Space();
 				if (GUILayout.Button("+")) {
 					Undo.RecordObject(target, "Add Setting");
-					settings.Insert(i, ScriptableObject.CreateInstance<PreviewSetting>());
+					settings.Insert(isEmpty ? 0 : i + 1, ScriptableObject.CreateInstance<PreviewSetting>());
 					EditorUtility.SetDirty(target);
 				}
 				using (new EditorGUI.DisabledGroupScope(isEmpty)) {
