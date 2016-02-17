@@ -33,9 +33,14 @@ namespace Uween
 			to = value;
 		}
 
-		override protected void UpdateValue(float f)
+		override protected void UpdateValue(Easings e, float t, float d)
 		{
-			value = from + (to - from) * f;
+			var v = Vector4.zero;
+			v.x = e.Calculate(t, from.x, to.x - from.x, d);
+			v.y = e.Calculate(t, from.y, to.y - from.y, d);
+			v.z = e.Calculate(t, from.z, to.z - from.z, d);
+			v.w = e.Calculate(t, from.w, to.w - from.w, d);
+			value = v;
 		}
 
 		public TweenVec4 Relative()
