@@ -15,17 +15,20 @@ namespace Uween
 
 		void OnEnable()
 		{
+			Undo.undoRedoPerformed += OnUndoRedo;
 			livePlayers.TryGetValue(target, out player);
 			RegisterPlayerEvents();
 		}
 
 		void OnDisable()
 		{
+			Undo.undoRedoPerformed -= OnUndoRedo;
 			UnregisterPlayerEvents();
 		}
 
 		void OnDestroy()
 		{
+			Undo.undoRedoPerformed -= OnUndoRedo;
 			UnregisterPlayerEvents();
 		}
 
@@ -36,7 +39,8 @@ namespace Uween
 			using (new GUILayout.VerticalScope()) {
 				EditorGUILayout.Space();
 				DrawSettings();
-				EditorGUILayout.Separator();
+				EditorGUILayout.Space();
+				EditorGUILayout.Space();
 				DrawControls();
 				EditorGUILayout.Space();
 			}
@@ -48,6 +52,7 @@ namespace Uween
 		{
 			var p = (Preview)target;
 			DrawPreviewSetting(p);
+			EditorGUILayout.Space();
 			DrawPreviewSettings(p);
 		}
 
@@ -60,6 +65,16 @@ namespace Uween
 				if (EditorGUI.EndChangeCheck()) {
 					Undo.RecordObject(p, "Modify Setting");
 					p.duration = d;
+					EditorUtility.SetDirty(p);
+				}
+			}
+			using (new GUILayout.HorizontalScope()) {
+				EditorGUI.BeginChangeCheck();
+				EditorGUILayout.PrefixLabel("Easing");
+				var e = (EasingEnum)EditorGUILayout.EnumPopup(p.easing);
+				if (EditorGUI.EndChangeCheck()) {
+					Undo.RecordObject(p, "Modify Setting");
+					p.easing = e;
 					EditorUtility.SetDirty(p);
 				}
 			}
@@ -91,12 +106,28 @@ namespace Uween
 				EditorGUILayout.PrefixLabel("Duration");
 				b = EditorGUILayout.Toggle(b);
 				using (new EditorGUI.DisabledGroupScope(!b)) {
-					d = EditorGUILayout.FloatField(s.duration);
+					d = EditorGUILayout.FloatField(d);
 				}
 				if (EditorGUI.EndChangeCheck()) {
 					Undo.RecordObject(s, "Modify Setting");
 					s.durationOverride = b;
 					s.duration = d;
+					EditorUtility.SetDirty(s);
+				}
+			}
+			using (new GUILayout.HorizontalScope()) {
+				EditorGUI.BeginChangeCheck();
+				var b = s.easingOverride;
+				var e = s.easing;
+				EditorGUILayout.PrefixLabel("Easing");
+				b = EditorGUILayout.Toggle(b);
+				using (new EditorGUI.DisabledGroupScope(!b)) {
+					e = (EasingEnum)EditorGUILayout.EnumPopup(e);
+				}
+				if (EditorGUI.EndChangeCheck()) {
+					Undo.RecordObject(s, "Modify Setting");
+					s.easingOverride = b;
+					s.easing = e;
 					EditorUtility.SetDirty(s);
 				}
 			}
@@ -174,7 +205,7 @@ namespace Uween
 			var settings = p.settings;
 			if (settings != null) {
 				foreach (var s in settings) {
-					s.Create(g, p.duration);
+					s.Create(g, p.duration, p.easing);
 				}
 			}
 		}
@@ -219,6 +250,12 @@ namespace Uween
 				UnregisterPlayerEvents();
 				livePlayers.Remove(target);
 				player = null;
+			});
+		}
+
+		void OnUndoRedo()
+		{
+			EditorUpdate(() => {
 			});
 		}
 
