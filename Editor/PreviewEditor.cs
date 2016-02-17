@@ -58,24 +58,28 @@ namespace Uween
 
 		void DrawPreviewSetting(Preview p)
 		{
-			using (new GUILayout.HorizontalScope()) {
-				EditorGUILayout.PrefixLabel("Duration");
+			{
 				var d = p.duration;
 				EditScope(p,
 					() => {
-						d = EditorGUILayout.FloatField(d);
+						using (new GUILayout.HorizontalScope()) {
+							EditorGUILayout.PrefixLabel("Duration");
+							d = EditorGUILayout.FloatField(d);
+						}
 					},
 					() => {
 						p.duration = d;
 					}
 				);
 			}
-			using (new GUILayout.HorizontalScope()) {
-				EditorGUILayout.PrefixLabel("Easing");
+			{
 				var e = p.easing;
 				EditScope(p,
 					() => {
-						e = (EasingEnum)EditorGUILayout.EnumPopup(e);
+						using (new GUILayout.HorizontalScope()) {
+							EditorGUILayout.PrefixLabel("Easing");
+							e = (EasingEnum)EditorGUILayout.EnumPopup(e);
+						}
 					},
 					() => {
 						p.easing = e;
@@ -103,15 +107,17 @@ namespace Uween
 
 		void DrawSettingElement(PreviewSetting s)
 		{
-			using (new GUILayout.HorizontalScope()) {
+			{
 				var b = s.durationOverride;
 				var d = s.duration;
-				EditorGUILayout.PrefixLabel("Duration");
 				EditScope(s,
 					() => {
-						b = EditorGUILayout.Toggle(b);
-						using (new EditorGUI.DisabledGroupScope(!b)) {
-							d = EditorGUILayout.FloatField(d);
+						using (new GUILayout.HorizontalScope()) {
+							EditorGUILayout.PrefixLabel("Duration");
+							b = EditorGUILayout.Toggle(b);
+							using (new EditorGUI.DisabledGroupScope(!b)) {
+								d = EditorGUILayout.FloatField(d);
+							}
 						}
 					},
 					() => {
@@ -120,15 +126,17 @@ namespace Uween
 					}
 				);
 			}
-			using (new GUILayout.HorizontalScope()) {
+			{
 				var b = s.easingOverride;
 				var e = s.easing;
-				EditorGUILayout.PrefixLabel("Easing");
 				EditScope(s,
 					() => {
-						b = EditorGUILayout.Toggle(b);
-						using (new EditorGUI.DisabledGroupScope(!b)) {
-							e = (EasingEnum)EditorGUILayout.EnumPopup(e);
+						using (new GUILayout.HorizontalScope()) {
+							EditorGUILayout.PrefixLabel("Easing");
+							b = EditorGUILayout.Toggle(b);
+							using (new EditorGUI.DisabledGroupScope(!b)) {
+								e = (EasingEnum)EditorGUILayout.EnumPopup(e);
+							}
 						}
 					},
 					() => {
@@ -137,12 +145,14 @@ namespace Uween
 					}
 				);
 			}
-			using (new GUILayout.HorizontalScope()) {
+			{
 				var x = s.x;
-				EditorGUILayout.PrefixLabel("X");
 				EditScope(s,
 					() => {
-						x = EditorGUILayout.FloatField(s.x);
+						using (new GUILayout.HorizontalScope()) {
+							EditorGUILayout.PrefixLabel("X");
+							x = EditorGUILayout.FloatField(s.x);
+						}
 					},
 					() => {
 						s.x = x;
