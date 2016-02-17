@@ -5,11 +5,17 @@ namespace Uween
 {
 	public class PreviewSetting : ScriptableObject
 	{
+		public float duration = 0f;
+		public bool durationOverride = false;
+
 		public float x;
 
-		public void Create(GameObject g, float duration)
+		public void Create(GameObject g, float d)
 		{
-			TweenX.Add(g, duration, x).EaseOutQuart();
+			if (durationOverride) {
+				d = duration;
+			}
+			TweenX.Add(g, d, x).EaseOutQuart();
 		}
 	}
 }

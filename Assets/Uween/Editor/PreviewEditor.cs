@@ -86,6 +86,21 @@ namespace Uween
 		{
 			using (new GUILayout.HorizontalScope()) {
 				EditorGUI.BeginChangeCheck();
+				var b = s.durationOverride;
+				var d = s.duration;
+				b = EditorGUILayout.ToggleLeft("Duration", b);
+				using (new EditorGUI.DisabledGroupScope(!b)) {
+					d = EditorGUILayout.FloatField(s.duration);
+				}
+				if (EditorGUI.EndChangeCheck()) {
+					Undo.RecordObject(s, "Modify Setting");
+					s.durationOverride = b;
+					s.duration = d;
+					EditorUtility.SetDirty(s);
+				}
+			}
+			using (new GUILayout.HorizontalScope()) {
+				EditorGUI.BeginChangeCheck();
 				EditorGUILayout.LabelField("X");
 				var x = EditorGUILayout.FloatField(s.x);
 				if (EditorGUI.EndChangeCheck()) {
