@@ -39,8 +39,6 @@ namespace Uween
 			using (new GUILayout.VerticalScope()) {
 				EditorGUILayout.Space();
 				DrawSettings();
-				EditorGUILayout.Space();
-				EditorGUILayout.Space();
 				DrawControls();
 				EditorGUILayout.Space();
 			}
@@ -115,6 +113,8 @@ namespace Uween
 					if (i < settings.Count || isEmpty) {
 						DrawSettingControl(settings, ref i, isEmpty);
 					}
+					EditorGUILayout.Space();
+					EditorGUILayout.Space();
 				}
 			}
 		}
@@ -122,75 +122,304 @@ namespace Uween
 		void DrawSettingElement(PreviewSetting s)
 		{
 			{
-				var b = s.delayOverride;
-				var d = s.delay;
+				var b = s.enabled;
+				var t = s.type;
 				EditScope(s,
 					() => {
 						using (new GUILayout.HorizontalScope()) {
-							EditorGUILayout.PrefixLabel("Delay");
+							EditorGUILayout.PrefixLabel("Type");
 							b = EditorGUILayout.Toggle(b);
 							using (new EditorGUI.DisabledGroupScope(!b)) {
-								d = EditorGUILayout.FloatField(d);
+								t = (TweenTypeEnum)EditorGUILayout.EnumPopup(t);
 							}
 						}
 					},
 					() => {
-						s.delayOverride = b;
-						s.delay = d;
+						s.enabled = b;
+						s.type = t;
 					}
 				);
 			}
-			{
-				var b = s.durationOverride;
-				var d = s.duration;
-				EditScope(s,
-					() => {
-						using (new GUILayout.HorizontalScope()) {
-							EditorGUILayout.PrefixLabel("Duration");
-							b = EditorGUILayout.Toggle(b);
-							using (new EditorGUI.DisabledGroupScope(!b)) {
-								d = EditorGUILayout.FloatField(d);
+			using (new EditorGUI.DisabledGroupScope(!s.enabled)) {
+				{
+					var b = s.delayOverride;
+					var d = s.delay;
+					EditScope(s,
+						() => {
+							using (new GUILayout.HorizontalScope()) {
+								EditorGUILayout.PrefixLabel("Delay");
+								b = EditorGUILayout.Toggle(b);
+								using (new EditorGUI.DisabledGroupScope(!b)) {
+									d = EditorGUILayout.FloatField(d);
+								}
 							}
+						},
+						() => {
+							s.delayOverride = b;
+							s.delay = d;
 						}
-					},
-					() => {
-						s.durationOverride = b;
-						s.duration = d;
-					}
-				);
-			}
-			{
-				var b = s.easingOverride;
-				var e = s.easing;
-				EditScope(s,
-					() => {
-						using (new GUILayout.HorizontalScope()) {
-							EditorGUILayout.PrefixLabel("Easing");
-							b = EditorGUILayout.Toggle(b);
-							using (new EditorGUI.DisabledGroupScope(!b)) {
-								e = (EasingEnum)EditorGUILayout.EnumPopup(e);
+					);
+				}
+				{
+					var b = s.durationOverride;
+					var d = s.duration;
+					EditScope(s,
+						() => {
+							using (new GUILayout.HorizontalScope()) {
+								EditorGUILayout.PrefixLabel("Duration");
+								b = EditorGUILayout.Toggle(b);
+								using (new EditorGUI.DisabledGroupScope(!b)) {
+									d = EditorGUILayout.FloatField(d);
+								}
 							}
+						},
+						() => {
+							s.durationOverride = b;
+							s.duration = d;
 						}
-					},
-					() => {
-						s.easingOverride = b;
-						s.easing = e;
-					}
-				);
-			}
-			{
-				var x = s.x;
-				EditScope(s,
-					() => {
-						using (new GUILayout.HorizontalScope()) {
-							EditorGUILayout.PrefixLabel("X");
-							x = EditorGUILayout.FloatField(s.x);
+					);
+				}
+				{
+					var b = s.easingOverride;
+					var e = s.easing;
+					EditScope(s,
+						() => {
+							using (new GUILayout.HorizontalScope()) {
+								EditorGUILayout.PrefixLabel("Easing");
+								b = EditorGUILayout.Toggle(b);
+								using (new EditorGUI.DisabledGroupScope(!b)) {
+									e = (EasingEnum)EditorGUILayout.EnumPopup(e);
+								}
+							}
+						},
+						() => {
+							s.easingOverride = b;
+							s.easing = e;
 						}
-					},
-					() => {
-						s.x = x;
-					}
-				);
+					);
+				}
+				if (s.type.IsTweenVec1()) {
+					var b = s.toEnabled;
+					var x = s.to.x;
+					EditScope(s,
+						() => {
+							using (new GUILayout.HorizontalScope()) {
+								EditorGUILayout.PrefixLabel("To");
+								b = EditorGUILayout.Toggle(b);
+								using (new EditorGUI.DisabledGroupScope(!b)) {
+									x = EditorGUILayout.FloatField(x);
+								}
+							}
+						},
+						() => {
+							s.toEnabled = b;
+							s.to.x = x;
+						}
+					);
+				}
+				if (s.type.IsTweenVec2()) {
+					var b = s.toEnabled;
+					var x = s.to.x;
+					var y = s.to.y;
+					EditScope(s,
+						() => {
+							using (new GUILayout.HorizontalScope()) {
+								EditorGUILayout.PrefixLabel("To");
+								b = EditorGUILayout.Toggle(b);
+								using (new EditorGUI.DisabledGroupScope(!b)) {
+									using (new EditorGUILayout.HorizontalScope()) {
+										x = EditorGUILayout.FloatField(x);
+										y = EditorGUILayout.FloatField(y);
+									}
+								}
+							}
+						},
+						() => {
+							s.toEnabled = b;
+							s.to.x = x;
+							s.to.y = y;
+						}
+					);
+				}
+				if (s.type.IsTweenVec3()) {
+					var b = s.toEnabled;
+					var x = s.to.x;
+					var y = s.to.y;
+					var z = s.to.z;
+					EditScope(s,
+						() => {
+							using (new GUILayout.HorizontalScope()) {
+								EditorGUILayout.PrefixLabel("To");
+								b = EditorGUILayout.Toggle(b);
+								using (new EditorGUI.DisabledGroupScope(!b)) {
+									using (new EditorGUILayout.HorizontalScope()) {
+										x = EditorGUILayout.FloatField(x);
+										y = EditorGUILayout.FloatField(y);
+										z = EditorGUILayout.FloatField(z);
+									}
+								}
+							}
+						},
+						() => {
+							s.toEnabled = b;
+							s.to.x = x;
+							s.to.y = y;
+							s.to.z = z;
+						}
+					);
+				}
+				if (s.type.IsTweenVec4()) {
+					var b = s.toEnabled;
+					var x = s.to.x;
+					var y = s.to.y;
+					var z = s.to.z;
+					var w = s.to.w;
+					EditScope(s,
+						() => {
+							using (new GUILayout.HorizontalScope()) {
+								EditorGUILayout.PrefixLabel("To");
+								b = EditorGUILayout.Toggle(b);
+								using (new EditorGUI.DisabledGroupScope(!b)) {
+									using (new EditorGUILayout.HorizontalScope()) {
+										x = EditorGUILayout.FloatField(x);
+										y = EditorGUILayout.FloatField(y);
+										z = EditorGUILayout.FloatField(z);
+										w = EditorGUILayout.FloatField(w);
+									}
+								}
+							}
+						},
+						() => {
+							s.toEnabled = b;
+							s.to.x = x;
+							s.to.y = y;
+							s.to.z = z;
+							s.to.w = w;
+						}
+					);
+				}
+				{
+					var b = s.toRelative;
+					EditScope(s,
+						() => {
+							using (new GUILayout.HorizontalScope()) {
+								EditorGUILayout.PrefixLabel("To Relative");
+								b = EditorGUILayout.Toggle(b);
+							}
+						},
+						() => {
+							s.toRelative = b;
+						}
+					);
+				}
+				if (s.type.IsTweenVec1()) {
+					var b = s.fromEnabled;
+					var x = s.from.x;
+					EditScope(s,
+						() => {
+							using (new GUILayout.HorizontalScope()) {
+								EditorGUILayout.PrefixLabel("From");
+								b = EditorGUILayout.Toggle(b);
+								using (new EditorGUI.DisabledGroupScope(!b)) {
+									x = EditorGUILayout.FloatField(x);
+								}
+							}
+						},
+						() => {
+							s.fromEnabled = b;
+							s.from.x = x;
+						}
+					);
+				}
+				if (s.type.IsTweenVec2()) {
+					var b = s.fromEnabled;
+					var x = s.from.x;
+					var y = s.from.y;
+					EditScope(s,
+						() => {
+							using (new GUILayout.HorizontalScope()) {
+								EditorGUILayout.PrefixLabel("From");
+								b = EditorGUILayout.Toggle(b);
+								using (new EditorGUI.DisabledGroupScope(!b)) {
+									x = EditorGUILayout.FloatField(x);
+									y = EditorGUILayout.FloatField(y);
+								}
+							}
+						},
+						() => {
+							s.fromEnabled = b;
+							s.from.x = x;
+							s.from.y = y;
+						}
+					);
+				}
+				if (s.type.IsTweenVec3()) {
+					var b = s.fromEnabled;
+					var x = s.from.x;
+					var y = s.from.y;
+					var z = s.from.z;
+					EditScope(s,
+						() => {
+							using (new GUILayout.HorizontalScope()) {
+								EditorGUILayout.PrefixLabel("From");
+								b = EditorGUILayout.Toggle(b);
+								using (new EditorGUI.DisabledGroupScope(!b)) {
+									x = EditorGUILayout.FloatField(x);
+									y = EditorGUILayout.FloatField(y);
+									z = EditorGUILayout.FloatField(z);
+								}
+							}
+						},
+						() => {
+							s.fromEnabled = b;
+							s.from.x = x;
+							s.from.y = y;
+							s.from.z = z;
+						}
+					);
+				}
+				if (s.type.IsTweenVec4()) {
+					var b = s.fromEnabled;
+					var x = s.from.x;
+					var y = s.from.y;
+					var z = s.from.z;
+					var w = s.from.w;
+					EditScope(s,
+						() => {
+							using (new GUILayout.HorizontalScope()) {
+								EditorGUILayout.PrefixLabel("From");
+								b = EditorGUILayout.Toggle(b);
+								using (new EditorGUI.DisabledGroupScope(!b)) {
+									x = EditorGUILayout.FloatField(x);
+									y = EditorGUILayout.FloatField(y);
+									z = EditorGUILayout.FloatField(z);
+									w = EditorGUILayout.FloatField(w);
+								}
+							}
+						},
+						() => {
+							s.fromEnabled = b;
+							s.from.x = x;
+							s.from.y = y;
+							s.from.z = z;
+							s.from.w = w;
+						}
+					);
+				}
+				{
+					var b = s.fromRelative;
+					EditScope(s,
+						() => {
+							using (new GUILayout.HorizontalScope()) {
+								EditorGUILayout.PrefixLabel("From Relative");
+								b = EditorGUILayout.Toggle(b);
+							}
+						},
+						() => {
+							s.fromRelative = b;
+						}
+					);
+				}
 			}
 		}
 
