@@ -5,6 +5,11 @@ namespace Uween
 {
 	public class TweenCA : TweenVec4
 	{
+		public static TweenCA Add(GameObject g, float duration)
+		{
+			return Add<TweenCA>(g, duration);
+		}
+
 		public static TweenCA Add(GameObject g, float duration, Vector4 to)
 		{
 			return Add<TweenCA>(g, duration, to);

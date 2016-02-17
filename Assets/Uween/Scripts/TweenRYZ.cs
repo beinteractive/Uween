@@ -4,9 +4,9 @@ namespace Uween
 {
 	public class TweenRYZ : TweenVec2R
 	{
-		public static TweenRYZ Add(GameObject g, float duration, Vector2 to)
+		public static TweenRYZ Add(GameObject g, float duration)
 		{
-			return Add<TweenRYZ>(g, duration, to);
+			return Add<TweenRYZ>(g, duration);
 		}
 
 		public static TweenRYZ Add(GameObject g, float duration, float toRY, float toRZ)
