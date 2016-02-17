@@ -4,6 +4,11 @@ namespace Uween
 {
 	public class TweenRX : TweenVec1R
 	{
+		public static TweenRX Add(GameObject g, float duration)
+		{
+			return Add<TweenRX>(g, duration);
+		}
+
 		public static TweenRX Add(GameObject g, float duration, float to)
 		{
 			return Add<TweenRX>(g, duration, to);
