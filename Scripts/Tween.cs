@@ -71,11 +71,7 @@ namespace Uween
 			delayTime = 0f;
 			elapsedTime = 0f;
 			easing = null;
-			if (OnComplete != null) {
-				foreach (System.Delegate d in OnComplete.GetInvocationList()) {
-					OnComplete -= (Callback)d;
-				}
-			}
+			OnComplete = null;
 		}
 
 		protected virtual void Update()
@@ -104,11 +100,9 @@ namespace Uween
 
 			if (!enabled) {
 				if (OnComplete != null) {
-					var oldCallbacks = OnComplete.GetInvocationList();
-					OnComplete();
-					foreach (System.Delegate d in oldCallbacks) {
-						OnComplete -= (Callback)d;
-					}
+					var callback = OnComplete;
+					OnComplete = null;
+					callback();
 				}
 			}
 		}
