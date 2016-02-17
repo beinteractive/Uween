@@ -35,7 +35,6 @@ namespace Uween
 
 			using (new GUILayout.VerticalScope()) {
 				EditorGUILayout.Space();
-				EditorGUILayout.LabelField("Tweens");
 				DrawSettings();
 				EditorGUILayout.Separator();
 				DrawControls();
@@ -48,6 +47,27 @@ namespace Uween
 		void DrawSettings()
 		{
 			var p = (Preview)target;
+			DrawPreviewSetting(p);
+			DrawPreviewSettings(p);
+		}
+
+		void DrawPreviewSetting(Preview p)
+		{
+			using (new GUILayout.HorizontalScope()) {
+				EditorGUI.BeginChangeCheck();
+				EditorGUILayout.LabelField("Duration");
+				var d = EditorGUILayout.FloatField(p.duration);
+				if (EditorGUI.EndChangeCheck()) {
+					Undo.RecordObject(p, "Modify Setting");
+					p.duration = d;
+					EditorUtility.SetDirty(p);
+				}
+			}
+		}
+
+		void DrawPreviewSettings(Preview p)
+		{
+			EditorGUILayout.LabelField("Tweens");
 			var settings = p.settings;
 			if (settings != null) {
 				var isEmpty = settings.Count == 0;
@@ -138,7 +158,7 @@ namespace Uween
 			var settings = p.settings;
 			if (settings != null) {
 				foreach (var s in settings) {
-					s.Create(g);
+					s.Create(g, p.duration);
 				}
 			}
 		}
