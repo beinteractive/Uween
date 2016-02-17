@@ -7,9 +7,9 @@ namespace Uween
 	{
 		public float x;
 
-		public void Create(GameObject g)
+		public void Create(GameObject g, float duration)
 		{
-			TweenX.Add(g, 2f, x).EaseOutQuart();
+			TweenX.Add(g, duration, x).EaseOutQuart();
 		}
 	}
 }
