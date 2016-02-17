@@ -34,41 +34,113 @@ namespace Uween
 			serializedObject.Update();
 
 			using (new GUILayout.VerticalScope()) {
-
 				EditorGUILayout.Space();
-
-				using (new GUILayout.HorizontalScope()) {
-					if (player == null) {
-						if (GUILayout.Button("Play")) {
-							Play();
-						}
-					} else {
-						if (player.isPlaying) {
-							if (GUILayout.Button("Pause")) {
-								player.Pause();
-							}
-						} else {
-							if (GUILayout.Button("Resume")) {
-								player.Resume();
-							}
-						}
-					}
-					using (new EditorGUI.DisabledGroupScope(player == null)) {
-						if (GUILayout.Button("Stop")) {
-							player.Skip();
-						}
-					}
-				}
-
-				using (new GUILayout.HorizontalScope()) {
-					EditorGUILayout.LabelField("Elapsed Time");
-					EditorGUILayout.LabelField(string.Format("{0:###0.00}", player != null ? player.elapsedTime : 0f));
-				}
-
+				EditorGUILayout.LabelField("Tweens");
+				DrawSettings();
+				EditorGUILayout.Separator();
+				DrawControls();
 				EditorGUILayout.Space();
 			}
 
 			serializedObject.ApplyModifiedProperties();
+		}
+
+		void DrawSettings()
+		{
+			var p = (Preview)target;
+			var settings = p.settings;
+			if (settings != null) {
+				var isEmpty = settings.Count == 0;
+				for (var i = 0; i <= settings.Count; ++i) {
+					if (i < settings.Count) {
+						DrawSettingElement(settings[i]);
+					}
+					if (i < settings.Count || isEmpty) {
+						DrawSettingControl(settings, ref i, isEmpty);
+					}
+				}
+			}
+		}
+
+		void DrawSettingElement(PreviewSetting s)
+		{
+			using (new GUILayout.HorizontalScope()) {
+				EditorGUI.BeginChangeCheck();
+				EditorGUILayout.LabelField("X");
+				var x = EditorGUILayout.FloatField(s.x);
+				if (EditorGUI.EndChangeCheck()) {
+					Undo.RecordObject(s, "Modify Setting");
+					s.x = x;
+					EditorUtility.SetDirty(s);
+				}
+			}
+		}
+
+		void DrawSettingControl(List<PreviewSetting> settings, ref int i, bool isEmpty)
+		{
+			using (new GUILayout.HorizontalScope()) {
+				EditorGUILayout.Space();
+				if (GUILayout.Button("+")) {
+					Undo.RecordObject(target, "Add Setting");
+					settings.Insert(i, ScriptableObject.CreateInstance<PreviewSetting>());
+					EditorUtility.SetDirty(target);
+				}
+				using (new EditorGUI.DisabledGroupScope(isEmpty)) {
+					if (GUILayout.Button("-")) {
+						Undo.RecordObject(target, "Remove Setting");
+						settings.RemoveAt(i);
+						--i;
+						EditorUtility.SetDirty(target);
+					}
+				}
+			}
+		}
+
+		void DrawControls()
+		{
+			var p = (Preview)target;
+			var settings = p.settings;
+
+			using (new GUILayout.HorizontalScope()) {
+				if (player == null) {
+					using (new EditorGUI.DisabledGroupScope(settings == null || settings.Count == 0)) {
+						if (GUILayout.Button("Play")) {
+							Play();
+						}
+					}
+				} else {
+					if (player.isPlaying) {
+						if (GUILayout.Button("Pause")) {
+							player.Pause();
+						}
+					} else {
+						if (GUILayout.Button("Resume")) {
+							player.Resume();
+						}
+					}
+				}
+				using (new EditorGUI.DisabledGroupScope(player == null)) {
+					if (GUILayout.Button("Stop")) {
+						player.Skip();
+					}
+				}
+			}
+
+			using (new GUILayout.HorizontalScope()) {
+				EditorGUILayout.LabelField("Elapsed Time");
+				EditorGUILayout.LabelField(string.Format("{0:###0.00}", player != null ? player.elapsedTime : 0f));
+			}
+		}
+
+		void CreateTweens(GameObject g)
+		{
+			var p = (Preview)target;
+			var settings = p.settings;
+			if (settings != null) {
+				foreach (var s in settings) {
+					s.Create(g);
+				}
+			}
 		}
 
 		void Play()
@@ -76,7 +148,7 @@ namespace Uween
 			EditorUpdate(() => {
 				player = new PreviewPlayer(((Preview)target).gameObject);
 				player.Play((g) => {
-					TweenX.Add(g, 2f, 200f).EaseOutQuart();
+					CreateTweens(g);
 				});
 				RegisterPlayerEvents();
 				livePlayers.Add(target, player);
