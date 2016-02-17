@@ -253,17 +253,22 @@ You can set to call method you like when tween completed.
 You can set a initial value. It will be apply immediately to GameObject (before delay).
 
  - `.From(v)` - Set a initial value to `v`.
- - `.FromThat()` - Set a initial value to destination value and destination value to current Value.
 
 ### Relative value
 
 You can set a destination or initial value relative from current value.
 
- - `.By()` - Current Value -> Current Value + Destination Value
- - `.FromBy(v)` - Current Value + `v` -> Destination Value
- - `.FromThatBy()` - Current Value + Destination Value -> Current Value
+ - `.Relative()` - Set a destination value to a value relative from current value
+ - `.FromRelative(v)` - Set a initial value to current value + `v`
 
-ref. Normal tween is: Current Value -> Destination Value
+### To current value
+
+If you don't set a destination value, it will automatically set as a current value.
+
+```C#
+// From 100px to current position
+TweenX.Add(gameObject, 1f).From(100f);
+```
 
 ### Pause/Resume
 

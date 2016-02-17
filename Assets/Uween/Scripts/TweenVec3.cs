@@ -38,10 +38,15 @@ namespace Uween
 			value = from + (to - from) * f;
 		}
 
-		public TweenVec3 By()
+		public TweenVec3 Relative()
 		{
 			to += value;
 			return this;
+		}
+
+		public TweenVec3 By()
+		{
+			return Relative();
 		}
 
 		public TweenVec3 From(Vector3 v)
@@ -49,6 +54,23 @@ namespace Uween
 			from = v;
 			value = from;
 			return this;
+		}
+
+		public TweenVec3 FromRelative(Vector3 v)
+		{
+			from = value + v;
+			value = from;
+			return this;
+		}
+
+		public TweenVec3 FromRelative(float x, float y, float z)
+		{
+			return FromRelative(new Vector3(x, y, z));
+		}
+
+		public TweenVec3 FromRelative(float v)
+		{
+			return FromRelative(v, v, v);
 		}
 
 		public TweenVec3 From(float x, float y, float z)
@@ -63,19 +85,17 @@ namespace Uween
 
 		public TweenVec3 FromBy(Vector3 v)
 		{
-			from = value + v;
-			value = from;
-			return this;
+			return FromRelative(v);
 		}
 
 		public TweenVec3 FromBy(float x, float y, float z)
 		{
-			return FromBy(new Vector3(x, y, z));
+			return FromRelative(x, y, z);
 		}
 
 		public TweenVec3 FromBy(float v)
 		{
-			return FromBy(v, v, v);
+			return FromRelative(v);
 		}
 
 		public TweenVec3 FromThat()
