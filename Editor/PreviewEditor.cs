@@ -59,24 +59,28 @@ namespace Uween
 		void DrawPreviewSetting(Preview p)
 		{
 			using (new GUILayout.HorizontalScope()) {
-				EditorGUI.BeginChangeCheck();
 				EditorGUILayout.PrefixLabel("Duration");
-				var d = EditorGUILayout.FloatField(p.duration);
-				if (EditorGUI.EndChangeCheck()) {
-					Undo.RecordObject(p, "Modify Setting");
-					p.duration = d;
-					EditorUtility.SetDirty(p);
-				}
+				var d = p.duration;
+				EditScope(p,
+					() => {
+						d = EditorGUILayout.FloatField(d);
+					},
+					() => {
+						p.duration = d;
+					}
+				);
 			}
 			using (new GUILayout.HorizontalScope()) {
-				EditorGUI.BeginChangeCheck();
 				EditorGUILayout.PrefixLabel("Easing");
-				var e = (EasingEnum)EditorGUILayout.EnumPopup(p.easing);
-				if (EditorGUI.EndChangeCheck()) {
-					Undo.RecordObject(p, "Modify Setting");
-					p.easing = e;
-					EditorUtility.SetDirty(p);
-				}
+				var e = p.easing;
+				EditScope(p,
+					() => {
+						e = (EasingEnum)EditorGUILayout.EnumPopup(e);
+					},
+					() => {
+						p.easing = e;
+					}
+				);
 			}
 		}
 
@@ -100,46 +104,50 @@ namespace Uween
 		void DrawSettingElement(PreviewSetting s)
 		{
 			using (new GUILayout.HorizontalScope()) {
-				EditorGUI.BeginChangeCheck();
 				var b = s.durationOverride;
 				var d = s.duration;
 				EditorGUILayout.PrefixLabel("Duration");
-				b = EditorGUILayout.Toggle(b);
-				using (new EditorGUI.DisabledGroupScope(!b)) {
-					d = EditorGUILayout.FloatField(d);
-				}
-				if (EditorGUI.EndChangeCheck()) {
-					Undo.RecordObject(s, "Modify Setting");
-					s.durationOverride = b;
-					s.duration = d;
-					EditorUtility.SetDirty(s);
-				}
+				EditScope(s,
+					() => {
+						b = EditorGUILayout.Toggle(b);
+						using (new EditorGUI.DisabledGroupScope(!b)) {
+							d = EditorGUILayout.FloatField(d);
+						}
+					},
+					() => {
+						s.durationOverride = b;
+						s.duration = d;
+					}
+				);
 			}
 			using (new GUILayout.HorizontalScope()) {
-				EditorGUI.BeginChangeCheck();
 				var b = s.easingOverride;
 				var e = s.easing;
 				EditorGUILayout.PrefixLabel("Easing");
-				b = EditorGUILayout.Toggle(b);
-				using (new EditorGUI.DisabledGroupScope(!b)) {
-					e = (EasingEnum)EditorGUILayout.EnumPopup(e);
-				}
-				if (EditorGUI.EndChangeCheck()) {
-					Undo.RecordObject(s, "Modify Setting");
-					s.easingOverride = b;
-					s.easing = e;
-					EditorUtility.SetDirty(s);
-				}
+				EditScope(s,
+					() => {
+						b = EditorGUILayout.Toggle(b);
+						using (new EditorGUI.DisabledGroupScope(!b)) {
+							e = (EasingEnum)EditorGUILayout.EnumPopup(e);
+						}
+					},
+					() => {
+						s.easingOverride = b;
+						s.easing = e;
+					}
+				);
 			}
 			using (new GUILayout.HorizontalScope()) {
-				EditorGUI.BeginChangeCheck();
+				var x = s.x;
 				EditorGUILayout.PrefixLabel("X");
-				var x = EditorGUILayout.FloatField(s.x);
-				if (EditorGUI.EndChangeCheck()) {
-					Undo.RecordObject(s, "Modify Setting");
-					s.x = x;
-					EditorUtility.SetDirty(s);
-				}
+				EditScope(s,
+					() => {
+						x = EditorGUILayout.FloatField(s.x);
+					},
+					() => {
+						s.x = x;
+					}
+				);
 			}
 		}
 
@@ -160,6 +168,22 @@ namespace Uween
 						EditorUtility.SetDirty(target);
 					}
 				}
+			}
+		}
+
+		void EditScope(Object o, System.Action f, System.Action apply)
+		{
+			EditScope(o, "Modify Setting", f, apply);
+		}
+
+		void EditScope(Object o, string name, System.Action f, System.Action apply)
+		{
+			EditorGUI.BeginChangeCheck();
+			f();
+			if (EditorGUI.EndChangeCheck()) {
+				Undo.RecordObject(o, name);
+				apply();
+				EditorUtility.SetDirty(o);
 			}
 		}
 
@@ -274,12 +298,14 @@ namespace Uween
 		}
 
 		public GameObject gameObject { get; private set; }
+
 		public bool isPlaying { get; private set; }
+
 		public float elapsedTime { get; private set; }
 
 		public event Callback OnUpdate;
 		public event Callback OnStop;
-		
+
 		double startTime;
 		Tween[] tweens;
 
