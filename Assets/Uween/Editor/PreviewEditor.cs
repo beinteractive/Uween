@@ -59,6 +59,20 @@ namespace Uween
 		void DrawPreviewSetting(Preview p)
 		{
 			{
+				var d = p.delay;
+				EditScope(p,
+					() => {
+						using (new GUILayout.HorizontalScope()) {
+							EditorGUILayout.PrefixLabel("Delay");
+							d = EditorGUILayout.FloatField(d);
+						}
+					},
+					() => {
+						p.delay = d;
+					}
+				);
+			}
+			{
 				var d = p.duration;
 				EditScope(p,
 					() => {
@@ -107,6 +121,25 @@ namespace Uween
 
 		void DrawSettingElement(PreviewSetting s)
 		{
+			{
+				var b = s.delayOverride;
+				var d = s.delay;
+				EditScope(s,
+					() => {
+						using (new GUILayout.HorizontalScope()) {
+							EditorGUILayout.PrefixLabel("Delay");
+							b = EditorGUILayout.Toggle(b);
+							using (new EditorGUI.DisabledGroupScope(!b)) {
+								d = EditorGUILayout.FloatField(d);
+							}
+						}
+					},
+					() => {
+						s.delayOverride = b;
+						s.delay = d;
+					}
+				);
+			}
 			{
 				var b = s.durationOverride;
 				var d = s.duration;
@@ -248,17 +281,6 @@ namespace Uween
 			}
 		}
 
-		void CreateTweens(GameObject g)
-		{
-			var p = (Preview)target;
-			var settings = p.settings;
-			if (settings != null) {
-				foreach (var s in settings) {
-					s.Create(g, p.duration, p.easing);
-				}
-			}
-		}
-
 		void Play()
 		{
 			EditorUpdate(() => {
@@ -266,7 +288,7 @@ namespace Uween
 				player = new PreviewPlayer(p.gameObject);
 				player.cooldown = p.cooldown;
 				player.Play((g) => {
-					CreateTweens(g);
+					p.CreateTweens(g);
 				});
 				RegisterPlayerEvents();
 				livePlayers.Add(target, player);

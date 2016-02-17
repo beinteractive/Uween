@@ -7,6 +7,9 @@ namespace Uween
 	public class Preview : MonoBehaviour
 	{
 		[SerializeField]
+		public float delay = 0f;
+
+		[SerializeField]
 		public float duration = 0.3f;
 
 		[SerializeField]
@@ -17,6 +20,15 @@ namespace Uween
 
 		[SerializeField]
 		public float cooldown = 0.5f;
+
+		public void CreateTweens(GameObject g)
+		{
+			if (settings != null) {
+				foreach (var s in settings) {
+					s.Create(g, this);
+				}
+			}
+		}
 	}
 
 	public enum EasingEnum
