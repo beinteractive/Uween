@@ -5,6 +5,9 @@ namespace Uween
 {
 	public class PreviewSetting : ScriptableObject
 	{
+		public float delay = 0f;
+		public bool delayOverride = false;
+
 		public float duration = 0.3f;
 		public bool durationOverride = false;
 
@@ -13,15 +16,13 @@ namespace Uween
 
 		public float x;
 
-		public void Create(GameObject g, float d, EasingEnum e)
+		public void Create(GameObject g, Preview p)
 		{
-			if (durationOverride) {
-				d = duration;
-			}
-			if (easingOverride) {
-				e = easing;
-			}
-			TweenX.Add(g, d, x).Easing = GetEasing(e);
+			var delay = delayOverride ? this.delay : p.delay;
+			var duration = durationOverride ? this.duration : p.duration;
+			var easing = easingOverride ? this.easing : p.easing;
+
+			TweenX.Add(g, duration, x).Delay(delay).Easing = GetEasing(easing);
 		}
 
 		Easings GetEasing(EasingEnum e)
