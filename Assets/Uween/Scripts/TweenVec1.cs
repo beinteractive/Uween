@@ -28,9 +28,9 @@ namespace Uween
 			to = value;
 		}
 
-		override protected void UpdateValue(float f)
+		override protected void UpdateValue(Easings e, float t, float d)
 		{
-			value = from + (to - from) * f;
+			value = e.Calculate(t, from, to - from, d);
 		}
 
 		public TweenVec1 Relative()

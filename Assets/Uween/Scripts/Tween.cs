@@ -86,17 +86,14 @@ namespace Uween
 			}
 
 			float t = elapsedTime - delay;
-			float f = 1f;
 
 			if (t >= duration) {
 				t = duration;
 				elapsedTime = delay + duration;
 				enabled = false;
-			} else {
-				f = Easing.Calculate(t, 0f, 1f, duration);
 			}
 
-			UpdateValue(f);
+			UpdateValue(Easing, t, duration);
 
 			if (!enabled) {
 				if (OnComplete != null) {
@@ -107,6 +104,6 @@ namespace Uween
 			}
 		}
 
-		protected abstract void UpdateValue(float f);
+		protected abstract void UpdateValue(Easings e, float t, float d);
 	}
 }
