@@ -5,7 +5,7 @@ namespace Uween
 {
 	public class PreviewSetting : ScriptableObject
 	{
-		public float duration = 0f;
+		public float duration = 0.3f;
 		public bool durationOverride = false;
 
 		public float x;

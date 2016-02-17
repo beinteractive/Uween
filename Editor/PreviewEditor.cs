@@ -55,7 +55,7 @@ namespace Uween
 		{
 			using (new GUILayout.HorizontalScope()) {
 				EditorGUI.BeginChangeCheck();
-				EditorGUILayout.LabelField("Duration");
+				EditorGUILayout.PrefixLabel("Duration");
 				var d = EditorGUILayout.FloatField(p.duration);
 				if (EditorGUI.EndChangeCheck()) {
 					Undo.RecordObject(p, "Modify Setting");
@@ -88,7 +88,8 @@ namespace Uween
 				EditorGUI.BeginChangeCheck();
 				var b = s.durationOverride;
 				var d = s.duration;
-				b = EditorGUILayout.ToggleLeft("Duration", b);
+				EditorGUILayout.PrefixLabel("Duration");
+				b = EditorGUILayout.Toggle(b);
 				using (new EditorGUI.DisabledGroupScope(!b)) {
 					d = EditorGUILayout.FloatField(s.duration);
 				}
@@ -101,7 +102,7 @@ namespace Uween
 			}
 			using (new GUILayout.HorizontalScope()) {
 				EditorGUI.BeginChangeCheck();
-				EditorGUILayout.LabelField("X");
+				EditorGUILayout.PrefixLabel("X");
 				var x = EditorGUILayout.FloatField(s.x);
 				if (EditorGUI.EndChangeCheck()) {
 					Undo.RecordObject(s, "Modify Setting");
@@ -162,7 +163,7 @@ namespace Uween
 			}
 
 			using (new GUILayout.HorizontalScope()) {
-				EditorGUILayout.LabelField("Elapsed Time");
+				EditorGUILayout.PrefixLabel("Elapsed Time");
 				EditorGUILayout.LabelField(string.Format("{0:###0.00}", player != null ? player.elapsedTime : 0f));
 			}
 		}
