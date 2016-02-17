@@ -49,21 +49,21 @@ namespace Uween
 			return this;
 		}
 
-		public TweenVec4 FromRleative(Vector4 v)
+		public TweenVec4 FromRelative(Vector4 v)
 		{
 			from = value + v;
 			value = from;
 			return this;
 		}
 
-		public TweenVec4 FromRleative(float x, float y, float z, float w)
+		public TweenVec4 FromRelative(float x, float y, float z, float w)
 		{
-			return FromRleative(new Vector4(x, y, z, w));
+			return FromRelative(new Vector4(x, y, z, w));
 		}
 
-		public TweenVec4 FromRleative(float v)
+		public TweenVec4 FromRelative(float v)
 		{
-			return FromRleative(v, v, v, v);
+			return FromRelative(v, v, v, v);
 		}
 
 		public TweenVec4 By()
@@ -90,17 +90,17 @@ namespace Uween
 
 		public TweenVec4 FromBy(Vector4 v)
 		{
-			return FromRleative(v);
+			return FromRelative(v);
 		}
 
 		public TweenVec4 FromBy(float x, float y, float z, float w)
 		{
-			return FromRleative(x, y, z, w);
+			return FromRelative(x, y, z, w);
 		}
 
 		public TweenVec4 FromBy(float v)
 		{
-			return FromRleative(v);
+			return FromRelative(v);
 		}
 
 		public TweenVec4 FromThat()
