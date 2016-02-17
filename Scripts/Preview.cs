@@ -14,6 +14,9 @@ namespace Uween
 
 		[SerializeField]
 		public List<PreviewSetting> settings = new List<PreviewSetting>();
+
+		[SerializeField]
+		public float cooldown = 0.5f;
 	}
 
 	public enum EasingEnum

@@ -221,6 +221,21 @@ namespace Uween
 				EditorGUILayout.PrefixLabel("Elapsed Time");
 				EditorGUILayout.LabelField(string.Format("{0:###0.00}", player != null ? player.elapsedTime : 0f));
 			}
+
+			{
+				var c = p.cooldown;
+				EditScope(p,
+					() => {
+						using (new GUILayout.HorizontalScope()) {
+							EditorGUILayout.PrefixLabel("Cooldown");
+							c = EditorGUILayout.FloatField(c);
+						}
+					},
+					() => {
+						p.cooldown = c;
+					}
+				);
+			}
 		}
 
 		void CreateTweens(GameObject g)
@@ -237,7 +252,9 @@ namespace Uween
 		void Play()
 		{
 			EditorUpdate(() => {
-				player = new PreviewPlayer(((Preview)target).gameObject);
+				var p = (Preview)target;
+				player = new PreviewPlayer(p.gameObject);
+				player.cooldown = p.cooldown;
 				player.Play((g) => {
 					CreateTweens(g);
 				});
@@ -298,15 +315,15 @@ namespace Uween
 		}
 
 		public GameObject gameObject { get; private set; }
-
 		public bool isPlaying { get; private set; }
-
 		public float elapsedTime { get; private set; }
+		public float cooldown { get; set; }
 
 		public event Callback OnUpdate;
 		public event Callback OnStop;
 
 		double startTime;
+		double finishTime;
 		Tween[] tweens;
 
 		Vector3 savedPosition;
@@ -323,6 +340,7 @@ namespace Uween
 				t.hideFlags = HideFlags.HideAndDontSave;
 			}
 			startTime = EditorApplication.timeSinceStartup;
+			finishTime = 0.0;
 			EditorApplication.update += Update;
 			Update();
 		}
@@ -347,6 +365,7 @@ namespace Uween
 		public void Stop()
 		{
 			isPlaying = false;
+			finishTime = 0.0;
 			EditorApplication.update -= Update;
 			foreach (var t in tweens) {
 				Object.DestroyImmediate(t);
@@ -363,20 +382,26 @@ namespace Uween
 
 		void Update()
 		{
-			if (isPlaying) {
-				elapsedTime = (float)(EditorApplication.timeSinceStartup - startTime);
-				var finished = true;
-				foreach (var t in tweens) {
-					if (t.enabled) {
-						finished = false;
-						t.Update(elapsedTime);
-					}
-				}
-				if (OnUpdate != null) {
-					OnUpdate();
-				}
-				if (finished) {
+			if (finishTime > 0.0) {
+				if (EditorApplication.timeSinceStartup >= finishTime) {
 					Stop();
+				}
+			} else {
+				if (isPlaying) {
+					elapsedTime = (float)(EditorApplication.timeSinceStartup - startTime);
+					var finished = true;
+					foreach (var t in tweens) {
+						if (t.enabled) {
+							finished = false;
+							t.Update(elapsedTime);
+						}
+					}
+					if (OnUpdate != null) {
+						OnUpdate();
+					}
+					if (finished) {
+						finishTime = EditorApplication.timeSinceStartup + (double)cooldown;
+					}
 				}
 			}
 		}
