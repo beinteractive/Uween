@@ -515,15 +515,40 @@ namespace Uween
 						}
 					);
 				}
+				{
+					var b = p.nextEnabled;
+					EditScope(p,
+						() => {
+							using (new GUILayout.HorizontalScope()) {
+								EditorGUILayout.PrefixLabel("Next Enabled");
+								b = EditorGUILayout.Toggle(b);
+							}
+						},
+						() => {
+							p.nextEnabled = b;
+						}
+					);
+				}
+				using (new EditorGUI.DisabledGroupScope(!p.nextEnabled)) {
+					using (new GUILayout.HorizontalScope()) {
+						EditorGUILayout.PropertyField(serializedObject.FindProperty("next"), true);
+					}
+				}
 			}
 		}
 
 		void Play()
 		{
+			Play(null);
+		}
+
+		void Play(PreviewPlayer parent)
+		{
 			EditorUpdate(() => {
 				var p = (Preview)target;
 				player = new PreviewPlayer(p.gameObject);
-				player.cooldown = p.cooldown;
+				player.parent = parent;
+				player.cooldown = p.hasNext ? 0f : p.cooldown;
 				player.Play((g) => {
 					p.CreateTweens(g);
 				});
@@ -554,8 +579,22 @@ namespace Uween
 			});
 		}
 
-		void OnPlayerStop()
+		void OnPlayerStop(bool finished)
 		{
+			var p = (Preview)target;
+			if (finished && p.hasNext) {
+				foreach (var next in p.next) {
+					var editor = (Editor)null;
+					Editor.CreateCachedEditor(next, typeof(PreviewEditor), ref editor);
+					if (editor != null) {
+						((PreviewEditor)editor).Play(player);
+					}
+				}
+			} else {
+				if (player != null) {
+					player.Cleanup();
+				}
+			}
 			EditorUpdate(() => {
 				UnregisterPlayerEvents();
 				livePlayers.Remove(target);
@@ -587,13 +626,16 @@ namespace Uween
 		public bool isPlaying { get; private set; }
 		public float elapsedTime { get; private set; }
 		public float cooldown { get; set; }
+		public PreviewPlayer parent { get; set; }
 
-		public event Callback OnUpdate;
-		public event Callback OnStop;
+		public event System.Action OnUpdate;
+		public event System.Action<bool> OnStop;
 
 		double startTime;
 		double finishTime;
 		Tween[] tweens;
+
+		int playingChildren;
 
 		Vector3 savedPosition;
 		Vector3 savedScale;
@@ -602,6 +644,9 @@ namespace Uween
 		public void Play(System.Action<GameObject> f)
 		{
 			isPlaying = true;
+			if (parent != null) {
+				parent.ChildStart();
+			}
 			Save(gameObject);
 			f(gameObject);
 			tweens = gameObject.GetComponentsInChildren<Tween>();
@@ -640,13 +685,20 @@ namespace Uween
 				Object.DestroyImmediate(t);
 			}
 			tweens = null;
-			Restore(gameObject);
 			OnUpdate = null;
 			if (OnStop != null) {
 				var callback = OnStop;
 				OnStop = null;
-				callback();
+				callback(startTime != 0f);
 			}
+			if (parent != null) {
+				parent.ChildStop();
+			}
+		}
+
+		public void Cleanup()
+		{
+			Restore(gameObject);
 		}
 
 		void Update()
@@ -687,6 +739,18 @@ namespace Uween
 			g.transform.localPosition = savedPosition;
 			g.transform.localScale = savedScale;
 			g.transform.localRotation = savedRotation;
+		}
+
+		void ChildStart()
+		{
+			++playingChildren;
+		}
+
+		void ChildStop()
+		{
+			if (--playingChildren <= 0) {
+				Cleanup();
+			}
 		}
 	}
 }

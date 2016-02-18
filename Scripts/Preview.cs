@@ -22,6 +22,13 @@ namespace Uween
 		public float cooldown = 0.5f;
 
 		[SerializeField]
+		public List<Preview> next = new List<Preview>();
+		public bool hasNext { get { return nextEnabled && next != null && next.Count > 0; } }
+
+		[SerializeField]
+		public bool nextEnabled = true;
+
+		[SerializeField]
 		public bool commonFoldout = true;
 		[SerializeField]
 		public bool settingsFoldout = true;
