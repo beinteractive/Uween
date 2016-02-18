@@ -467,13 +467,12 @@ namespace Uween
 		void DrawControls()
 		{
 			var p = (Preview)target;
-			var settings = p.settings;
 
 			if ((p.controlsFoldout = EditorGUILayout.Foldout(p.controlsFoldout, "Control"))) {
 				
 				using (new GUILayout.HorizontalScope()) {
 					if (player == null) {
-						using (new EditorGUI.DisabledGroupScope(settings == null || settings.Count == 0)) {
+						using (new EditorGUI.DisabledGroupScope(!p.hasSettings)) {
 							if (GUILayout.Button("Play")) {
 								Play();
 							}
@@ -533,6 +532,14 @@ namespace Uween
 					using (new GUILayout.HorizontalScope()) {
 						EditorGUILayout.PropertyField(serializedObject.FindProperty("next"), true);
 					}
+				}
+			}
+
+			EditorGUILayout.Space();
+
+			using (new EditorGUI.DisabledGroupScope(!p.hasSettings)) {
+				if (GUILayout.Button("Copy Script")) {
+					EditorGUIUtility.systemCopyBuffer = p.GenerateScript(p.gameObject.name);
 				}
 			}
 		}

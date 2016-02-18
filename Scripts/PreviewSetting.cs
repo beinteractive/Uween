@@ -25,15 +25,35 @@ namespace Uween
 		public bool fromEnabled = false;
 		public bool fromRelative = false;
 
+		public float GetDelay(float d)
+		{
+			return delayOverride ? delay : d;
+		}
+
+		public float GetDuration(float d)
+		{
+			return durationOverride ? duration : d;
+		}
+
+		public float GetTotalDuration(float delay, float duration)
+		{
+			return GetDelay(delay) + GetDuration(duration);
+		}
+
+		public EasingEnum GetEasing(EasingEnum e)
+		{
+			return easingOverride ? easing : e;
+		}
+
 		public void Create(GameObject g, Preview p)
 		{
 			if (!enabled) {
 				return;
 			}
 
-			var delay = delayOverride ? this.delay : p.delay;
-			var duration = durationOverride ? this.duration : p.duration;
-			var easing = easingOverride ? this.easing : p.easing;
+			var delay = GetDelay(p.delay);
+			var duration = GetDuration(p.duration);
+			var easing = GetEasing(p.easing);
 
 			var tween = Add(g, duration, type);
 			{
@@ -103,7 +123,7 @@ namespace Uween
 				}
 			}
 			tween.DelayTime = delay;
-			tween.Easing = GetEasing(easing);
+			tween.Easing = GetEasingClass(easing);
 		}
 
 		Tween Add(GameObject g, float d, TweenTypeEnum type)
@@ -118,7 +138,7 @@ namespace Uween
 			return (Tween)add.Invoke(null, new object[] { g, d });
 		}
 
-		Easings GetEasing(EasingEnum e)
+		Easings GetEasingClass(EasingEnum e)
 		{
 			return (Easings)System.Activator.CreateInstance(System.Reflection.Assembly.GetAssembly(typeof(Easings)).GetType("Uween." + e.ToString()));
 		}
