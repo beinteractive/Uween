@@ -56,70 +56,75 @@ namespace Uween
 
 		void DrawPreviewSetting(Preview p)
 		{
-			{
-				var d = p.delay;
-				EditScope(p,
-					() => {
-						using (new GUILayout.HorizontalScope()) {
-							EditorGUILayout.PrefixLabel("Delay");
-							d = EditorGUILayout.FloatField(d);
+			if ((p.commonFoldout = EditorGUILayout.Foldout(p.commonFoldout, "Common"))) {
+				{
+					var d = p.delay;
+					EditScope(p,
+						() => {
+							using (new GUILayout.HorizontalScope()) {
+								EditorGUILayout.PrefixLabel("Delay");
+								d = EditorGUILayout.FloatField(d);
+							}
+						},
+						() => {
+							p.delay = d;
 						}
-					},
-					() => {
-						p.delay = d;
-					}
-				);
-			}
-			{
-				var d = p.duration;
-				EditScope(p,
-					() => {
-						using (new GUILayout.HorizontalScope()) {
-							EditorGUILayout.PrefixLabel("Duration");
-							d = EditorGUILayout.FloatField(d);
+					);
+				}
+				{
+					var d = p.duration;
+					EditScope(p,
+						() => {
+							using (new GUILayout.HorizontalScope()) {
+								EditorGUILayout.PrefixLabel("Duration");
+								d = EditorGUILayout.FloatField(d);
+							}
+						},
+						() => {
+							p.duration = d;
 						}
-					},
-					() => {
-						p.duration = d;
-					}
-				);
-			}
-			{
-				var e = p.easing;
-				EditScope(p,
-					() => {
-						using (new GUILayout.HorizontalScope()) {
-							EditorGUILayout.PrefixLabel("Easing");
-							e = (EasingEnum)EditorGUILayout.EnumPopup(e);
+					);
+				}
+				{
+					var e = p.easing;
+					EditScope(p,
+						() => {
+							using (new GUILayout.HorizontalScope()) {
+								EditorGUILayout.PrefixLabel("Easing");
+								e = (EasingEnum)EditorGUILayout.EnumPopup(e);
+							}
+						},
+						() => {
+							p.easing = e;
 						}
-					},
-					() => {
-						p.easing = e;
-					}
-				);
+					);
+				}
 			}
 		}
 
 		void DrawPreviewSettings(Preview p)
 		{
-			EditorGUILayout.LabelField("Tweens");
-			var settings = p.settings;
-			if (settings != null) {
-				var isEmpty = settings.Count == 0;
-				for (var i = 0; i <= settings.Count; ++i) {
-					if (i < settings.Count) {
-						DrawSettingElement(settings[i]);
+			if ((p.settingsFoldout = EditorGUILayout.Foldout(p.settingsFoldout, "Tweens"))) {
+				var settings = p.settings;
+				if (settings != null) {
+					var isEmpty = settings.Count == 0;
+					for (var i = 0; i <= settings.Count; ++i) {
+						if (i < settings.Count) {
+							DrawSettingElement(settings[i], i);
+						}
+						if (i < settings.Count || isEmpty) {
+							DrawSettingControl(settings, ref i, isEmpty);
+						}
+						if (i < settings.Count - 1 || isEmpty) {
+							EditorGUILayout.Space();
+							EditorGUILayout.Space();
+						}
 					}
-					if (i < settings.Count || isEmpty) {
-						DrawSettingControl(settings, ref i, isEmpty);
-					}
-					EditorGUILayout.Space();
-					EditorGUILayout.Space();
 				}
 			}
 		}
 
-		void DrawSettingElement(PreviewSetting s)
+		void DrawSettingElement(PreviewSetting s, int i)
 		{
 			{
 				var b = s.enabled;
@@ -127,7 +132,7 @@ namespace Uween
 				EditScope(s,
 					() => {
 						using (new GUILayout.HorizontalScope()) {
-							EditorGUILayout.PrefixLabel("Type");
+							EditorGUILayout.PrefixLabel(string.Format("Tween #{0} Type", i + 1));
 							b = EditorGUILayout.Toggle(b);
 							using (new EditorGUI.DisabledGroupScope(!b)) {
 								t = (TweenTypeEnum)EditorGUILayout.EnumPopup(t);
@@ -464,49 +469,52 @@ namespace Uween
 			var p = (Preview)target;
 			var settings = p.settings;
 
-			using (new GUILayout.HorizontalScope()) {
-				if (player == null) {
-					using (new EditorGUI.DisabledGroupScope(settings == null || settings.Count == 0)) {
-						if (GUILayout.Button("Play")) {
-							Play();
-						}
-					}
-				} else {
-					if (player.isPlaying) {
-						if (GUILayout.Button("Pause")) {
-							player.Pause();
+			if ((p.controlsFoldout = EditorGUILayout.Foldout(p.controlsFoldout, "Control"))) {
+				
+				using (new GUILayout.HorizontalScope()) {
+					if (player == null) {
+						using (new EditorGUI.DisabledGroupScope(settings == null || settings.Count == 0)) {
+							if (GUILayout.Button("Play")) {
+								Play();
+							}
 						}
 					} else {
-						if (GUILayout.Button("Resume")) {
-							player.Resume();
+						if (player.isPlaying) {
+							if (GUILayout.Button("Pause")) {
+								player.Pause();
+							}
+						} else {
+							if (GUILayout.Button("Resume")) {
+								player.Resume();
+							}
+						}
+					}
+					using (new EditorGUI.DisabledGroupScope(player == null)) {
+						if (GUILayout.Button("Stop")) {
+							player.Skip();
 						}
 					}
 				}
-				using (new EditorGUI.DisabledGroupScope(player == null)) {
-					if (GUILayout.Button("Stop")) {
-						player.Skip();
-					}
+
+				using (new GUILayout.HorizontalScope()) {
+					EditorGUILayout.PrefixLabel("Elapsed Time");
+					EditorGUILayout.LabelField(string.Format("{0:###0.00}", player != null ? player.elapsedTime : 0f));
 				}
-			}
 
-			using (new GUILayout.HorizontalScope()) {
-				EditorGUILayout.PrefixLabel("Elapsed Time");
-				EditorGUILayout.LabelField(string.Format("{0:###0.00}", player != null ? player.elapsedTime : 0f));
-			}
-
-			{
-				var c = p.cooldown;
-				EditScope(p,
-					() => {
-						using (new GUILayout.HorizontalScope()) {
-							EditorGUILayout.PrefixLabel("Cooldown");
-							c = EditorGUILayout.FloatField(c);
+				{
+					var c = p.cooldown;
+					EditScope(p,
+						() => {
+							using (new GUILayout.HorizontalScope()) {
+								EditorGUILayout.PrefixLabel("Cooldown");
+								c = EditorGUILayout.FloatField(c);
+							}
+						},
+						() => {
+							p.cooldown = c;
 						}
-					},
-					() => {
-						p.cooldown = c;
-					}
-				);
+					);
+				}
 			}
 		}
 
