@@ -21,6 +21,13 @@ namespace Uween
 		[SerializeField]
 		public float cooldown = 0.5f;
 
+		[SerializeField]
+		public bool commonFoldout = true;
+		[SerializeField]
+		public bool settingsFoldout = true;
+		[SerializeField]
+		public bool controlsFoldout = true;
+
 		public void CreateTweens(GameObject g)
 		{
 			if (settings != null) {
