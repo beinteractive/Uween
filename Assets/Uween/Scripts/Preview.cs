@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Uween
 {
@@ -17,6 +18,7 @@ namespace Uween
 
 		[SerializeField]
 		public List<PreviewSetting> settings = new List<PreviewSetting>();
+		public bool hasSettings { get { return settings != null && settings.Count > 0; } }
 
 		[SerializeField]
 		public float cooldown = 0.5f;
@@ -42,6 +44,88 @@ namespace Uween
 					s.Create(g, this);
 				}
 			}
+		}
+
+		public string GenerateScript(string name)
+		{
+			return GenerateScript(name, "");
+		}
+
+		public string GenerateScript(string name, string indent)
+		{
+			var s = "";
+			var settings = new List<PreviewSetting>(this.settings.Where((e) => e.enabled));
+			settings.Sort((a, b) => (int)(a.GetTotalDuration(delay, duration) - b.GetTotalDuration(delay, duration)));
+			for (var i = 0; i < settings.Count; ++i) {
+				var setting = settings[i];
+				var type = setting.type;
+				s += indent;
+				s += type.ToString();
+				s += string.Format(".Add({0}, {1}f", name, setting.GetDuration(duration));
+				if (setting.toEnabled) {
+					s += ", ";
+					s += VectorToString(type, setting.to);
+					s += ")";
+					if (setting.toRelative) {
+						s += ".Relative()";
+					}
+				} else {
+					s += ")";
+				}
+				if (setting.fromEnabled) {
+					if (setting.fromRelative) {
+						s += ".FromRelative(" + VectorToString(type, setting.from) + ")";
+					} else {
+						s += ".From(" + VectorToString(type, setting.from) + ")";
+					}
+				}
+				var delay = setting.GetDelay(this.delay);
+				if (delay > 0f) {
+					s += string.Format(".Delay({0}f)", delay);
+				}
+				var e = setting.GetEasing(easing);
+				if (e != EasingEnum.LinearEaseNone) {
+					s += "." + e.ToString() + "()";
+				}
+				if (i == settings.Count - 1 && hasNext) {
+					s += ".Then(() => {\n";
+					foreach (var n in next) {
+						s += n.GenerateScript(name, indent + "\t");
+					}
+					s += "})";
+				}
+				s += ";\n";
+			}
+			return s;
+		}
+
+		string VectorToString(TweenTypeEnum type, Vector4 v)
+		{
+			if (type.IsTweenVec1()) {
+				return string.Format("{0}f", v.x);
+			}
+			if (type.IsTweenVec2()) {
+				if (v.x == v.y) {
+					return string.Format("{0}f", v.x);
+				} else {
+					return string.Format("{0}f, {1}f", v.x, v.y);
+				}
+			}
+			if (type.IsTweenVec3()) {
+				if (v.x == v.y && v.y == v.z) {
+					return string.Format("{0}f", v.x);
+				} else {
+					return string.Format("{0}f, {1}f, {2}f", v.x, v.y, v.z);
+				}
+			}
+			if (type.IsTweenVec4()) {
+				if (v.x == v.y && v.y == v.z && v.z == v.w) {
+					return string.Format("{0}f", v.x);
+				} else {
+					return string.Format("{0}f, {1}f, {2}f, {3}f", v.x, v.y, v.z, v.w);
+				}
+			}
+			return "";
 		}
 	}
 
