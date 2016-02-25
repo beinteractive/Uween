@@ -94,7 +94,11 @@ namespace Uween
 			float t = elapsedTime - delay;
 
 			if (t >= duration) {
-				t = duration;
+				if (duration == 0f) {
+					t = duration = 1f;
+				} else {
+					t = duration;
+				}
 				elapsedTime = delay + duration;
 				enabled = false;
 			}
