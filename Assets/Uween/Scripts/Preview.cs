@@ -18,13 +18,23 @@ namespace Uween
 
 		[SerializeField]
 		public List<PreviewSetting> settings = new List<PreviewSetting>();
+
 		public bool hasSettings { get { return settings != null && settings.Count > 0; } }
 
 		[SerializeField]
 		public float cooldown = 0.5f;
 
 		[SerializeField]
+		public List<Preview> link = new List<Preview>();
+
+		public bool hasLink { get { return linkEnabled && link != null && link.Count > 0; } }
+
+		[SerializeField]
+		public bool linkEnabled = true;
+
+		[SerializeField]
 		public List<Preview> next = new List<Preview>();
+
 		public bool hasNext { get { return nextEnabled && next != null && next.Count > 0; } }
 
 		[SerializeField]
@@ -37,13 +47,18 @@ namespace Uween
 		[SerializeField]
 		public bool controlsFoldout = true;
 
-		public void CreateTweens(GameObject g)
+		public List<Tween> CreateTweens(GameObject g)
 		{
+			var result = new List<Tween>();
 			if (settings != null) {
 				foreach (var s in settings) {
-					s.Create(g, this);
+					var t = s.Create(g, this);
+					if (t != null) {
+						result.Add(t);
+					}
 				}
 			}
+			return result;
 		}
 
 		public string GenerateScript(string name)
@@ -95,6 +110,11 @@ namespace Uween
 					s += "})";
 				}
 				s += ";\n";
+			}
+			if (hasLink) {
+				foreach (var l in link) {
+					s += l.GenerateScript(name, indent);
+				}
 			}
 			return s;
 		}
@@ -234,37 +254,68 @@ namespace Uween
 		public static System.Type AsType(this TweenTypeEnum type)
 		{
 			switch (type) {
-			case TweenTypeEnum.TweenA: return typeof(TweenA);
-			case TweenTypeEnum.TweenC: return typeof(TweenC);
-			case TweenTypeEnum.TweenCA: return typeof(TweenCA);
-			case TweenTypeEnum.TweenFillAmount: return typeof(TweenFillAmount);
-			case TweenTypeEnum.TweenP: return typeof(TweenP);
-			case TweenTypeEnum.TweenP3: return typeof(TweenP3);
-			case TweenTypeEnum.TweenR: return typeof(TweenR);
-			case TweenTypeEnum.TweenR3: return typeof(TweenR3);
-			case TweenTypeEnum.TweenRX: return typeof(TweenRX);
-			case TweenTypeEnum.TweenRXY: return typeof(TweenRXY);
-			case TweenTypeEnum.TweenRXYZ: return typeof(TweenRXYZ);
-			case TweenTypeEnum.TweenRXZ: return typeof(TweenRXZ);
-			case TweenTypeEnum.TweenRY: return typeof(TweenRY);
-			case TweenTypeEnum.TweenRYZ: return typeof(TweenRYZ);
-			case TweenTypeEnum.TweenRZ: return typeof(TweenRZ);
-			case TweenTypeEnum.TweenS: return typeof(TweenS);
-			case TweenTypeEnum.TweenS3: return typeof(TweenS3);
-			case TweenTypeEnum.TweenSX: return typeof(TweenSX);
-			case TweenTypeEnum.TweenSXY: return typeof(TweenSXY);
-			case TweenTypeEnum.TweenSXYZ: return typeof(TweenSXYZ);
-			case TweenTypeEnum.TweenSXZ: return typeof(TweenSXZ);
-			case TweenTypeEnum.TweenSY: return typeof(TweenSY);
-			case TweenTypeEnum.TweenSYZ: return typeof(TweenSYZ);
-			case TweenTypeEnum.TweenSZ: return typeof(TweenSZ);
-			case TweenTypeEnum.TweenX: return typeof(TweenX);
-			case TweenTypeEnum.TweenXY: return typeof(TweenXY);
-			case TweenTypeEnum.TweenXYZ: return typeof(TweenXYZ);
-			case TweenTypeEnum.TweenXZ: return typeof(TweenXZ);
-			case TweenTypeEnum.TweenY: return typeof(TweenY);
-			case TweenTypeEnum.TweenYZ: return typeof(TweenYZ);
-			case TweenTypeEnum.TweenZ: return typeof(TweenZ);
+			case TweenTypeEnum.TweenA:
+				return typeof(TweenA);
+			case TweenTypeEnum.TweenC:
+				return typeof(TweenC);
+			case TweenTypeEnum.TweenCA:
+				return typeof(TweenCA);
+			case TweenTypeEnum.TweenFillAmount:
+				return typeof(TweenFillAmount);
+			case TweenTypeEnum.TweenP:
+				return typeof(TweenP);
+			case TweenTypeEnum.TweenP3:
+				return typeof(TweenP3);
+			case TweenTypeEnum.TweenR:
+				return typeof(TweenR);
+			case TweenTypeEnum.TweenR3:
+				return typeof(TweenR3);
+			case TweenTypeEnum.TweenRX:
+				return typeof(TweenRX);
+			case TweenTypeEnum.TweenRXY:
+				return typeof(TweenRXY);
+			case TweenTypeEnum.TweenRXYZ:
+				return typeof(TweenRXYZ);
+			case TweenTypeEnum.TweenRXZ:
+				return typeof(TweenRXZ);
+			case TweenTypeEnum.TweenRY:
+				return typeof(TweenRY);
+			case TweenTypeEnum.TweenRYZ:
+				return typeof(TweenRYZ);
+			case TweenTypeEnum.TweenRZ:
+				return typeof(TweenRZ);
+			case TweenTypeEnum.TweenS:
+				return typeof(TweenS);
+			case TweenTypeEnum.TweenS3:
+				return typeof(TweenS3);
+			case TweenTypeEnum.TweenSX:
+				return typeof(TweenSX);
+			case TweenTypeEnum.TweenSXY:
+				return typeof(TweenSXY);
+			case TweenTypeEnum.TweenSXYZ:
+				return typeof(TweenSXYZ);
+			case TweenTypeEnum.TweenSXZ:
+				return typeof(TweenSXZ);
+			case TweenTypeEnum.TweenSY:
+				return typeof(TweenSY);
+			case TweenTypeEnum.TweenSYZ:
+				return typeof(TweenSYZ);
+			case TweenTypeEnum.TweenSZ:
+				return typeof(TweenSZ);
+			case TweenTypeEnum.TweenX:
+				return typeof(TweenX);
+			case TweenTypeEnum.TweenXY:
+				return typeof(TweenXY);
+			case TweenTypeEnum.TweenXYZ:
+				return typeof(TweenXYZ);
+			case TweenTypeEnum.TweenXZ:
+				return typeof(TweenXZ);
+			case TweenTypeEnum.TweenY:
+				return typeof(TweenY);
+			case TweenTypeEnum.TweenYZ:
+				return typeof(TweenYZ);
+			case TweenTypeEnum.TweenZ:
+				return typeof(TweenZ);
 			}
 			return null;
 		}

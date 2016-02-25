@@ -45,10 +45,10 @@ namespace Uween
 			return easingOverride ? easing : e;
 		}
 
-		public void Create(GameObject g, Preview p)
+		public Tween Create(GameObject g, Preview p)
 		{
 			if (!enabled) {
-				return;
+				return null;
 			}
 
 			var delay = GetDelay(p.delay);
@@ -124,13 +124,14 @@ namespace Uween
 			}
 			tween.DelayTime = delay;
 			tween.Easing = GetEasingClass(easing);
+			return tween;
 		}
 
 		Tween Add(GameObject g, float d, TweenTypeEnum type)
 		{
 			var add = (System.Reflection.MethodInfo)null;
 			for (var t = type.AsType(); t != null; t = t.BaseType) {
-				add = t.GetMethod("Add", new System.Type[] {typeof(GameObject), typeof(float) });
+				add = t.GetMethod("Add", new System.Type[] { typeof(GameObject), typeof(float) });
 				if (add != null) {
 					break;
 				}

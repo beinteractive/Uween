@@ -630,9 +630,13 @@ namespace Uween
 		}
 
 		public GameObject gameObject { get; private set; }
+
 		public bool isPlaying { get; private set; }
+
 		public float elapsedTime { get; private set; }
+
 		public float cooldown { get; set; }
+
 		public PreviewPlayer parent { get; set; }
 
 		public event System.Action OnUpdate;
