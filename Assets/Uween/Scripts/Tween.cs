@@ -5,6 +5,7 @@ namespace Uween
 	/// <summary>
 	/// A base class for Uween's tweens.
 	/// </summary>
+	[ExecuteInEditMode]
 	public abstract class Tween : MonoBehaviour
 	{
 		protected static T Get<T>(GameObject g, float duration) where T : Tween
@@ -74,12 +75,17 @@ namespace Uween
 			OnComplete = null;
 		}
 
-		protected virtual void Update()
+		public virtual void Update()
+		{
+			Update(elapsedTime + Time.deltaTime);
+		}
+
+		public virtual void Update(float elapsed)
 		{
 			float delay = DelayTime;
 			float duration = Duration;
 
-			elapsedTime += Time.deltaTime;
+			elapsedTime = elapsed;
 
 			if (elapsedTime < delay) {
 				return;
@@ -88,7 +94,11 @@ namespace Uween
 			float t = elapsedTime - delay;
 
 			if (t >= duration) {
-				t = duration;
+				if (duration == 0f) {
+					t = duration = 1f;
+				} else {
+					t = duration;
+				}
 				elapsedTime = delay + duration;
 				enabled = false;
 			}
