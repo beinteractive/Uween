@@ -51,6 +51,16 @@ All code is written in `Uween - Example/Scripts/Example.cs`.
 
 ## Quick help
 
+### Import
+
+Add `using Uween;` in your script.
+
+```C#
+using UnityEngine;
+using System.Collections;
+using Uween;
+```
+
 ### Starting tween
 
 Call a tween class's `Add` method.
