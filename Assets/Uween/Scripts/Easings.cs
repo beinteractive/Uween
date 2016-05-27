@@ -786,6 +786,8 @@ namespace Uween
 			if ((t /= d) == 1) {
 				return b + c;
 			}
+			float a = this.a;
+			float p = this.p;
 			if (p == 0f) {
 				p = d * 0.3f;
 			}
@@ -824,6 +826,8 @@ namespace Uween
 			if ((t /= d / 2f) == 2f) {
 				return b + c;
 			}
+			float a = this.a;
+			float p = this.p;
 			if (p == 0f) {
 				p = d * (0.3f * 1.5f);
 			}
@@ -864,6 +868,8 @@ namespace Uween
 			if ((t /= d) == 1f) {
 				return b + c;
 			}
+			float a = this.a;
+			float p = this.p;
 			if (p == 0f) {
 				p = d * 0.3f;
 			}
@@ -897,6 +903,8 @@ namespace Uween
 		override public float Calculate(float t, float b, float c, float d)
 		{
 			float s;
+			float a = this.a;
+			float p = this.p;
 
 			c /= 2f;
         
