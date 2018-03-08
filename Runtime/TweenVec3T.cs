@@ -2,63 +2,53 @@
 
 namespace Uween
 {
-	public abstract class TweenVec3T : TweenVec3
-	{
-		public abstract Vector3 vector { get; set; }
+    public abstract class TweenVec3T : TweenVec3
+    {
+        protected abstract Vector3 Vector { get; set; }
 
-		override public Vector3 value {
-			get {
-				return vector;
-			}
-			set {
-				vector = value;
-			}
-		}
+        protected override Vector3 Value
+        {
+            get { return Vector; }
+            set { Vector = value; }
+        }
 
-		Transform t;
+        private Transform T;
 
-		protected Transform GetTransform()
-		{
-			if (t == null) {
-				t = transform;
-			}
-			return t;
-		}
-	}
+        protected Transform GetTransform()
+        {
+            if (T == null)
+            {
+                T = transform;
+            }
 
-	public abstract class TweenVec3P : TweenVec3T
-	{
-		override public Vector3 vector {
-			get {
-				return GetTransform().localPosition;
-			}
-			set {
-				GetTransform().localPosition = value;
-			}
-		}
-	}
+            return T;
+        }
+    }
 
-	public abstract class TweenVec3R : TweenVec3T
-	{
-		override public Vector3 vector {
-			get {
-				return GetTransform().localRotation.eulerAngles;
-			}
-			set {
-				GetTransform().localRotation = Quaternion.Euler(value);
-			}
-		}
-	}
+    public abstract class TweenVec3P : TweenVec3T
+    {
+        protected override Vector3 Vector
+        {
+            get { return GetTransform().localPosition; }
+            set { GetTransform().localPosition = value; }
+        }
+    }
 
-	public abstract class TweenVec3S : TweenVec3T
-	{
-		override public Vector3 vector {
-			get {
-				return GetTransform().localScale;
-			}
-			set {
-				GetTransform().localScale = value;
-			}
-		}
-	}
+    public abstract class TweenVec3R : TweenVec3T
+    {
+        protected override Vector3 Vector
+        {
+            get { return GetTransform().localRotation.eulerAngles; }
+            set { GetTransform().localRotation = Quaternion.Euler(value); }
+        }
+    }
+
+    public abstract class TweenVec3S : TweenVec3T
+    {
+        protected override Vector3 Vector
+        {
+            get { return GetTransform().localScale; }
+            set { GetTransform().localScale = value; }
+        }
+    }
 }

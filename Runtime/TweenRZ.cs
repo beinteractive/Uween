@@ -2,27 +2,27 @@
 
 namespace Uween
 {
-	public class TweenRZ : TweenVec1R
-	{
-		public static TweenRZ Add(GameObject g, float duration)
-		{
-			return Add<TweenRZ>(g, duration);
-		}
+    public class TweenRZ : TweenVec1R
+    {
+        public static TweenRZ Add(GameObject g, float duration)
+        {
+            return Add<TweenRZ>(g, duration);
+        }
 
-		public static TweenRZ Add(GameObject g, float duration, float to)
-		{
-			return Add<TweenRZ>(g, duration, to);
-		}
+        public static TweenRZ Add(GameObject g, float duration, float to)
+        {
+            return Add<TweenRZ>(g, duration, to);
+        }
 
-		override public float value {
-			get {
-				return vector.z;
-			}
-			set {
-				Vector3 v = vector;
-				v.z = value;
-				vector = v;
-			}
-		}
-	}
+        protected override float Value
+        {
+            get { return Vector.z; }
+            set
+            {
+                var v = Vector;
+                v.z = value;
+                Vector = v;
+            }
+        }
+    }
 }

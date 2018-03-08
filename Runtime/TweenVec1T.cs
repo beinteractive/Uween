@@ -2,54 +2,47 @@
 
 namespace Uween
 {
-	public abstract class TweenVec1T : TweenVec1
-	{
-		public abstract Vector3 vector { get; set; }
+    public abstract class TweenVec1T : TweenVec1
+    {
+        protected abstract Vector3 Vector { get; set; }
 
-		Transform t;
+        private Transform T;
 
-		protected Transform GetTransform()
-		{
-			if (t == null) {
-				t = transform;
-			}
-			return t;
-		}
-	}
+        protected Transform GetTransform()
+        {
+            if (T == null)
+            {
+                T = transform;
+            }
 
-	public abstract class TweenVec1P : TweenVec1T
-	{
-		override public Vector3 vector {
-			get {
-				return GetTransform().localPosition;
-			}
-			set {
-				GetTransform().localPosition = value;
-			}
-		}
-	}
+            return T;
+        }
+    }
 
-	public abstract class TweenVec1R : TweenVec1T
-	{
-		override public Vector3 vector {
-			get {
-				return GetTransform().localRotation.eulerAngles;
-			}
-			set {
-				GetTransform().localRotation = Quaternion.Euler(value);
-			}
-		}
-	}
+    public abstract class TweenVec1P : TweenVec1T
+    {
+        protected override Vector3 Vector
+        {
+            get { return GetTransform().localPosition; }
+            set { GetTransform().localPosition = value; }
+        }
+    }
 
-	public abstract class TweenVec1S : TweenVec1T
-	{
-		override public Vector3 vector {
-			get {
-				return GetTransform().localScale;
-			}
-			set {
-				GetTransform().localScale = value;
-			}
-		}
-	}
+    public abstract class TweenVec1R : TweenVec1T
+    {
+        protected override Vector3 Vector
+        {
+            get { return GetTransform().localRotation.eulerAngles; }
+            set { GetTransform().localRotation = Quaternion.Euler(value); }
+        }
+    }
+
+    public abstract class TweenVec1S : TweenVec1T
+    {
+        protected override Vector3 Vector
+        {
+            get { return GetTransform().localScale; }
+            set { GetTransform().localScale = value; }
+        }
+    }
 }

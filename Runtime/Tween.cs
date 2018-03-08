@@ -2,118 +2,144 @@
 
 namespace Uween
 {
-	/// <summary>
-	/// A base class for Uween's tweens.
-	/// </summary>
-	[ExecuteInEditMode]
-	public abstract class Tween : MonoBehaviour
-	{
-		protected static T Get<T>(GameObject g, float duration) where T : Tween
-		{
-			T tween = g.GetComponent<T>();
-			if (tween == null) {
-				tween = g.AddComponent<T>();
-			}
-			tween.Reset();
-			tween.duration = duration;
-			tween.enabled = true;
-			return tween;
-		}
+    /// <summary>
+    /// A base class for Uween's tweens.
+    /// </summary>
+    public abstract class Tween : MonoBehaviour
+    {
+        protected static T Get<T>(GameObject g, float duration) where T : Tween
+        {
+            T tween = g.GetComponent<T>();
+            if (tween == null)
+            {
+                tween = g.AddComponent<T>();
+            }
 
-		protected float duration;
-		protected float delayTime;
-		protected float elapsedTime;
-		protected Easings easing;
+            tween.Reset();
+            tween.duration = duration;
+            tween.enabled = true;
+            return tween;
+        }
 
-		/// <summary>
-		/// Total duration of this tween (sec).
-		/// </summary>
-		/// <value>The duration.</value>
-		public float Duration { get { return Mathf.Max(0f, duration); } }
+        protected float duration;
+        protected float delayTime;
+        protected float elapsedTime;
+        protected Easings easing;
 
-		/// <summary>
-		/// Current playing position (sec).
-		/// </summary>
-		/// <value>The position.</value>
-		public float Position { get { return Mathf.Max(0f, elapsedTime - DelayTime); } }
+        /// <summary>
+        /// Total duration of this tween (sec).
+        /// </summary>
+        /// <value>The duration.</value>
+        public float Duration
+        {
+            get { return Mathf.Max(0f, duration); }
+        }
 
-		/// <summary>
-		/// Delay for starting tween (sec).
-		/// </summary>
-		/// <value>The delay time.</value>
-		public float DelayTime { get { return Mathf.Max(0f, delayTime); } set { delayTime = value; } }
+        /// <summary>
+        /// Current playing position (sec).
+        /// </summary>
+        /// <value>The position.</value>
+        public float Position
+        {
+            get { return Mathf.Max(0f, elapsedTime - DelayTime); }
+        }
 
-		/// <summary>
-		/// Easing that be used for calculating tweening value.
-		/// </summary>
-		/// <value>The easing.</value>
-		public Easings Easing { get { return easing ?? Linear.EaseNone; } set { easing = value; } }
+        /// <summary>
+        /// Delay for starting tween (sec).
+        /// </summary>
+        /// <value>The delay time.</value>
+        public float DelayTime
+        {
+            get { return Mathf.Max(0f, delayTime); }
+            set { delayTime = value; }
+        }
 
-		/// <summary>
-		/// Whether tween has been completed or not.
-		/// </summary>
-		/// <value><c>true</c> if this tween is complete; otherwise, <c>false</c>.</value>
-		public bool IsComplete { get { return Position >= Duration; } }
+        /// <summary>
+        /// Easing that be used for calculating tweening value.
+        /// </summary>
+        /// <value>The easing.</value>
+        public Easings Easing
+        {
+            get { return easing ?? Linear.EaseNone; }
+            set { easing = value; }
+        }
 
-		/// <summary>
-		/// Occurs when on tween complete.
-		/// </summary>
-		public event Callback OnComplete;
+        /// <summary>
+        /// Whether tween has been completed or not.
+        /// </summary>
+        /// <value><c>true</c> if this tween is complete; otherwise, <c>false</c>.</value>
+        public bool IsComplete
+        {
+            get { return Position >= Duration; }
+        }
 
-		public void Skip()
-		{
-			elapsedTime = DelayTime + Duration;
-			Update();
-		}
+        /// <summary>
+        /// Occurs when on tween complete.
+        /// </summary>
+        public event Callback OnComplete;
 
-		protected virtual void Reset()
-		{
-			duration = 0f;
-			delayTime = 0f;
-			elapsedTime = 0f;
-			easing = null;
-			OnComplete = null;
-		}
+        public void Skip()
+        {
+            elapsedTime = DelayTime + Duration;
+            Update();
+        }
 
-		public virtual void Update()
-		{
-			Update(elapsedTime + Time.deltaTime);
-		}
+        protected virtual void Reset()
+        {
+            duration = 0f;
+            delayTime = 0f;
+            elapsedTime = 0f;
+            easing = null;
+            OnComplete = null;
+        }
 
-		public virtual void Update(float elapsed)
-		{
-			float delay = DelayTime;
-			float duration = Duration;
+        public virtual void Update()
+        {
+            Update(elapsedTime + Time.deltaTime);
+        }
 
-			elapsedTime = elapsed;
+        public virtual void Update(float elapsed)
+        {
+            var delay = DelayTime;
+            var duration = Duration;
 
-			if (elapsedTime < delay) {
-				return;
-			}
+            elapsedTime = elapsed;
 
-			float t = elapsedTime - delay;
+            if (elapsedTime < delay)
+            {
+                return;
+            }
 
-			if (t >= duration) {
-				if (duration == 0f) {
-					t = duration = 1f;
-				} else {
-					t = duration;
-				}
-				elapsedTime = delay + duration;
-				enabled = false;
-			}
+            var t = elapsedTime - delay;
 
-			UpdateValue(Easing, t, duration);
+            if (t >= duration)
+            {
+                if (duration == 0f)
+                {
+                    t = duration = 1f;
+                }
+                else
+                {
+                    t = duration;
+                }
 
-			if (!enabled) {
-				if (OnComplete != null) {
-					var callback = OnComplete;
-					OnComplete = null;
-					callback();
-				}
-			}
-		}
+                elapsedTime = delay + duration;
+                enabled = false;
+            }
 
-		protected abstract void UpdateValue(Easings e, float t, float d);
-	}
+            UpdateValue(Easing, t, duration);
+
+            if (!enabled)
+            {
+                if (OnComplete != null)
+                {
+                    var callback = OnComplete;
+                    OnComplete = null;
+                    callback();
+                }
+            }
+        }
+
+        protected abstract void UpdateValue(Easings e, float t, float d);
+    }
 }
