@@ -1,6 +1,6 @@
 ﻿namespace Uween
 {
-	public class TweenS : TweenSXY
-	{
-	}
+    public class TweenS : TweenSXY
+    {
+    }
 }

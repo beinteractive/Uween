@@ -1,4 +1,4 @@
 ﻿namespace Uween
 {
-	public delegate void Callback();
+    public delegate void Callback();
 }

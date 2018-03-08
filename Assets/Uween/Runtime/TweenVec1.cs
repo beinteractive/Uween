@@ -2,81 +2,81 @@
 
 namespace Uween
 {
-	public abstract class TweenVec1 : Tween
-	{
-		protected static T Add<T>(GameObject g, float duration) where T : TweenVec1
-		{
-			return Tween.Get<T>(g, duration);
-		}
+    public abstract class TweenVec1 : Tween
+    {
+        protected static T Add<T>(GameObject g, float duration) where T : TweenVec1
+        {
+            return Tween.Get<T>(g, duration);
+        }
 
-		protected static T Add<T>(GameObject g, float duration, float to) where T : TweenVec1
-		{
-			var t = Add<T>(g, duration);
-			t.to = to;
-			return t;
-		}
+        protected static T Add<T>(GameObject g, float duration, float to) where T : TweenVec1
+        {
+            var t = Add<T>(g, duration);
+            t.ToValue = to;
+            return t;
+        }
 
-		public float from;
-		public float to;
+        public float FromValue;
+        public float ToValue;
 
-		public abstract float value { get; set; }
+        protected abstract float Value { get; set; }
 
-		override protected void Reset()
-		{
-			base.Reset();
-			from = value;
-			to = value;
-		}
+        protected override void Reset()
+        {
+            base.Reset();
+            FromValue = Value;
+            ToValue = Value;
+        }
 
-		override protected void UpdateValue(Easings e, float t, float d)
-		{
-			value = e.Calculate(t, from, to - from, d);
-		}
+        protected override void UpdateValue(Easings e, float t, float d)
+        {
+            Value = e.Calculate(t, FromValue, ToValue - FromValue, d);
+        }
 
-		public TweenVec1 Relative()
-		{
-			to += value;
-			return this;
-		}
+        public TweenVec1 Relative()
+        {
+            ToValue += Value;
+            return this;
+        }
 
-		public TweenVec1 FromRelative(float v)
-		{
-			from = value + v;
-			value = from;
-			return this;
-		}
+        public TweenVec1 FromRelative(float v)
+        {
+            FromValue = Value + v;
+            Value = FromValue;
+            return this;
+        }
 
-		public TweenVec1 By()
-		{
-			return Relative();
-		}
+        public TweenVec1 By()
+        {
+            return Relative();
+        }
 
-		public TweenVec1 From(float v)
-		{
-			from = v;
-			value = from;
-			return this;
-		}
+        public TweenVec1 From(float v)
+        {
+            FromValue = v;
+            Value = FromValue;
+            return this;
+        }
 
-		public TweenVec1 FromBy(float v)
-		{
-			return FromRelative(v);
-		}
+        public TweenVec1 FromBy(float v)
+        {
+            return FromRelative(v);
+        }
 
-		public TweenVec1 FromThat()
-		{
-			from = to;
-			to = value;
-			value = from;
-			return this;
-		}
+        public TweenVec1 FromThat()
+        {
+            FromValue = ToValue;
+            ToValue = Value;
+            Value = FromValue;
+            return this;
+        }
 
-		public TweenVec1 FromThatBy()
-		{
-			from = value + to;
-			to = value;
-			value = from;
-			return this;
-		}
-	}
+        public TweenVec1 FromThatBy()
+        {
+            FromValue = Value + ToValue;
+            ToValue = Value;
+            Value = FromValue;
+            return this;
+        }
+    }
 }
