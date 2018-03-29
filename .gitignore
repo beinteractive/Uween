@@ -29,5 +29,6 @@ tmp/
 *.swp
 *.swo
 
+Extras/
 Assets/Plugins*
 .idea/
