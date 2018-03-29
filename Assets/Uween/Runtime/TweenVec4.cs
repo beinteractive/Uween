@@ -6,7 +6,7 @@ namespace Uween
     {
         protected static T Add<T>(GameObject g, float duration) where T : TweenVec4
         {
-            return Add<T>(g, duration);
+            return Tween.Get<T>(g, duration);
         }
 
         protected static T Add<T>(GameObject g, float duration, Vector4 to) where T : TweenVec4
