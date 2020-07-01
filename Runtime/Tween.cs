@@ -5,19 +5,16 @@ namespace Uween
     /// <summary>
     /// A base class for Uween's tweens.
     /// </summary>
-    public abstract class Tween : MonoBehaviour
+    public abstract class Tween
     {
-        protected static T Get<T>(GameObject g, float duration) where T : Tween
+        protected static T Get<T>(GameObject g, float duration) where T : Tween, new()
         {
-            T tween = g.GetComponent<T>();
-            if (tween == null)
-            {
-                tween = g.AddComponent<T>();
-            }
+            var updater = Updater.Ensure();
+            var tween = updater.Find<T>(g) ?? updater.Create<T>(g);
 
             tween.Reset();
             tween.duration = duration;
-            tween.enabled = true;
+            tween.Enabled = true;
             return tween;
         }
 
@@ -26,23 +23,21 @@ namespace Uween
         protected float elapsedTime;
         protected Easings easing;
 
+        public GameObject Object { get; internal set; }
+        public bool Enabled;
+        internal Tween Next;
+
         /// <summary>
         /// Total duration of this tween (sec).
         /// </summary>
         /// <value>The duration.</value>
-        public float Duration
-        {
-            get { return Mathf.Max(0f, duration); }
-        }
+        public float Duration => Mathf.Max(0f, duration);
 
         /// <summary>
         /// Current playing position (sec).
         /// </summary>
         /// <value>The position.</value>
-        public float Position
-        {
-            get { return Mathf.Max(0f, elapsedTime - DelayTime); }
-        }
+        public float Position => Mathf.Max(0f, elapsedTime - DelayTime);
 
         /// <summary>
         /// Delay for starting tween (sec).
@@ -50,8 +45,8 @@ namespace Uween
         /// <value>The delay time.</value>
         public float DelayTime
         {
-            get { return Mathf.Max(0f, delayTime); }
-            set { delayTime = value; }
+            get => Mathf.Max(0f, delayTime);
+            set => delayTime = value;
         }
 
         /// <summary>
@@ -60,18 +55,15 @@ namespace Uween
         /// <value>The easing.</value>
         public Easings Easing
         {
-            get { return easing ?? Linear.EaseNone; }
-            set { easing = value; }
+            get => easing ?? Linear.EaseNone;
+            set => easing = value;
         }
 
         /// <summary>
         /// Whether tween has been completed or not.
         /// </summary>
         /// <value><c>true</c> if this tween is complete; otherwise, <c>false</c>.</value>
-        public bool IsComplete
-        {
-            get { return Position >= Duration; }
-        }
+        public bool IsComplete => Position >= Duration;
 
         /// <summary>
         /// Occurs when on tween complete.
@@ -81,7 +73,7 @@ namespace Uween
         public void Skip()
         {
             elapsedTime = DelayTime + Duration;
-            Update();
+            Update(0f);
         }
 
         protected virtual void Reset()
@@ -93,15 +85,11 @@ namespace Uween
             OnComplete = null;
         }
 
-        public virtual void Update()
+        internal virtual void Update(float dt)
         {
-            Update(elapsedTime + Time.deltaTime);
-        }
-
-        public virtual void Update(float elapsed)
-        {
+            var elapsed = elapsedTime + dt;
             var delay = DelayTime;
-            var duration = Duration;
+            var d = Duration;
 
             elapsedTime = elapsed;
 
@@ -112,24 +100,24 @@ namespace Uween
 
             var t = elapsedTime - delay;
 
-            if (t >= duration)
+            if (t >= d)
             {
-                if (duration == 0f)
+                if (d == 0f)
                 {
-                    t = duration = 1f;
+                    t = d = 1f;
                 }
                 else
                 {
-                    t = duration;
+                    t = d;
                 }
 
-                elapsedTime = delay + duration;
-                enabled = false;
+                elapsedTime = delay + d;
+                Enabled = false;
             }
 
-            UpdateValue(Easing, t, duration);
+            UpdateValue(Easing, t, d);
 
-            if (!enabled)
+            if (!Enabled)
             {
                 if (OnComplete != null)
                 {

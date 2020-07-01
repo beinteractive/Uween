@@ -21,7 +21,7 @@ namespace Uween
         {
             if (Im == null)
             {
-                Im = GetComponent<Image>();
+                Im = Object.GetComponent<Image>();
             }
 
             return Im;

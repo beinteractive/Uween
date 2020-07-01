@@ -22,7 +22,7 @@ namespace Uween
 
         public static T Then<T>(this T tween, Callback callback) where T : Tween
         {
-            if (tween.enabled || !tween.IsComplete)
+            if (tween.Enabled || !tween.IsComplete)
             {
                 tween.OnComplete += callback;
             }
@@ -41,11 +41,16 @@ namespace Uween
 
         public static void PauseTweens<T>(this GameObject g) where T : Tween
         {
-            foreach (T t in g.GetComponents<T>())
+            if (Updater.Instance == null)
+            {
+                return;
+            }
+            
+            foreach (var t in Updater.Instance.FindAll<T>(g))
             {
                 if (!t.IsComplete)
                 {
-                    t.enabled = false;
+                    t.Enabled = false;
                 }
             }
         }
@@ -57,11 +62,16 @@ namespace Uween
 
         public static void ResumeTweens<T>(this GameObject g) where T : Tween
         {
-            foreach (T t in g.GetComponents<T>())
+            if (Updater.Instance == null)
+            {
+                return;
+            }
+            
+            foreach (var t in Updater.Instance.FindAll<T>(g))
             {
                 if (!t.IsComplete)
                 {
-                    t.enabled = true;
+                    t.Enabled = true;
                 }
             }
         }
@@ -73,7 +83,12 @@ namespace Uween
 
         public static void SkipTweens<T>(this GameObject g) where T : Tween
         {
-            foreach (T t in g.GetComponents<T>())
+            if (Updater.Instance == null)
+            {
+                return;
+            }
+            
+            foreach (var t in Updater.Instance.FindAll<T>(g))
             {
                 if (!t.IsComplete)
                 {

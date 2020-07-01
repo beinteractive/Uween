@@ -18,7 +18,7 @@ namespace Uween
         {
             if (T == null)
             {
-                T = transform;
+                T = Object.transform;
             }
 
             return T;

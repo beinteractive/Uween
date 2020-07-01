@@ -31,7 +31,7 @@ namespace Uween
         {
             if (G == null)
             {
-                G = GetComponent<Graphic>();
+                G = Object.GetComponent<Graphic>();
             }
 
             return G;
