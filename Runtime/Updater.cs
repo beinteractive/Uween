@@ -79,7 +79,7 @@ namespace Uween
                 }
                 else
                 {
-                    if (t.Enabled)
+                    if (t.Object.activeInHierarchy && t.Enabled)
                     {
                         t.Update(dt);
                     }
