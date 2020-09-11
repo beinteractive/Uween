@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Uween
 {
+    [ExecuteInEditMode]
     public class Updater : MonoBehaviour
     {
         public static Updater Instance { get; private set; }
@@ -13,7 +16,11 @@ namespace Uween
             {
                 var g = new GameObject("Uween Updater");
                 Instance = g.AddComponent<Updater>();
+#if UNITY_EDITOR
+                g.hideFlags = HideFlags.HideAndDontSave;
+#else
                 DontDestroyOnLoad(g);
+#endif
             }
             
             return Instance;
@@ -57,12 +64,39 @@ namespace Uween
             First = t;
             return t;
         }
+        
+#if UNITY_EDITOR
 
+        private double LastTime;
+        
+        private void OnEnable()
+        {
+            EditorApplication.update += DoUpdate;
+            LastTime = EditorApplication.timeSinceStartup;
+        }
+
+        private void OnDisable()
+        {
+            EditorApplication.update -= DoUpdate;
+        }
+#else
         private void Update()
+        {
+            DoUpdate();
+        }
+#endif
+
+        private void DoUpdate()
         {
             var t = First;
             var prev = (Tween) null;
             var dt = Time.deltaTime;
+
+#if UNITY_EDITOR
+            var time = EditorApplication.timeSinceStartup;
+            dt = (float)(time - LastTime);
+            LastTime = time;
+#endif
 
             while (t != null)
             {
@@ -88,6 +122,10 @@ namespace Uween
                 prev = t;
                 t = t.Next;
             }
+
+#if UNITY_EDITOR
+            SceneView.RepaintAll();
+#endif
         }
     }
 }
