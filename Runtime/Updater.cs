@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Uween
 {
-    [ExecuteInEditMode]
+    [ExecuteAlways]
     public class Updater : MonoBehaviour
     {
         public static Updater Instance { get; private set; }
