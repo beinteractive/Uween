@@ -1,0 +1,16 @@
+{
+    "name": "Uween.Examples",
+    "rootNamespace": "",
+    "references": [
+        "GUID:5079dc06f82a840cebe1fdd04122a908"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
